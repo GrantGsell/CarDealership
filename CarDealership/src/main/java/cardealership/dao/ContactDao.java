@@ -18,8 +18,8 @@ public interface ContactDao {
 
     Contact getContactById(int id);
 
-    Contact deleteContactById(int id);
+    void deleteContactById(int id);
 
     // TODO: we may not need this method.
-    boolean updateContactById(Contact contact);
+    void updateContactById(Contact contact);
 }
