@@ -109,7 +109,15 @@ VALUES ('Alabama', 'AL'),
 ;
 
 insert into salesInfo (nameSales, phone, email, street1, city, stateId, zipcode, purchasePrice, vin, purchaseTypeId, userId)
-	values ('Marine Jackson', '123-456-7890', 'marine@test.com', '123 1st ave.', 'New York', 36, 12345, 9800.0, '1234567890ABCDEFG', 1, 2);
+	values ('Marine Jackson', '123-456-7890', 'marine@test.com', '123 1st ave.', 'New York', 33, 12345, 9800.0, '1234567890ABCDEFG', 1, 2);
     
 insert into contact (contactName, phone, email, message)
 	values ('Marine Jackson', '123-456-7890', 'marine@test.com', 'Please call me!');  
+    
+select * from salesInfo;
+select * from UsState;
+
+select * from salesInfo s
+	join UsState u on s.stateId = u.stateId
+    where s.stateId = u.stateId
+;

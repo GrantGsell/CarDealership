@@ -19,9 +19,9 @@ public interface SalesDao {
 
     Sales getSalesById(int id);
 
-    Sales deleteSalesById(int id);
+    void deleteSalesById(int id);
 
-    boolean updateSales(Sales sales);
+    void updateSales(Sales sales);
 
     // TODO: we may need following methods
     List<Sales> getAllSalesByUser(int userId);

@@ -12,7 +12,7 @@ import java.util.Objects;
  * @author Jeonghoon
  */
 public class Sales {
-    private int saleId;
+    private int salesId;
 
     private String name;
     private String phone;
@@ -20,7 +20,7 @@ public class Sales {
     private String street1;
     private String street2;
     private String city;
-    private String state;
+    private State state;
     private String zipcode;
     private BigDecimal purchasePrice;
 
@@ -28,12 +28,12 @@ public class Sales {
     private PurchaseType purchaseType;
     private User user;
 
-    public int getSaleId() {
-        return saleId;
+    public int getSalesId() {
+        return salesId;
     }
 
-    public void setSaleId(int saleId) {
-        this.saleId = saleId;
+    public void setSalesId(int salesId) {
+        this.salesId = salesId;
     }
 
     public String getName() {
@@ -84,11 +84,11 @@ public class Sales {
         this.city = city;
     }
 
-    public String getState() {
+    public State getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(State state) {
         this.state = state;
     }
 
@@ -134,20 +134,20 @@ public class Sales {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 97 * hash + this.saleId;
-        hash = 97 * hash + Objects.hashCode(this.name);
-        hash = 97 * hash + Objects.hashCode(this.phone);
-        hash = 97 * hash + Objects.hashCode(this.email);
-        hash = 97 * hash + Objects.hashCode(this.street1);
-        hash = 97 * hash + Objects.hashCode(this.street2);
-        hash = 97 * hash + Objects.hashCode(this.city);
-        hash = 97 * hash + Objects.hashCode(this.state);
-        hash = 97 * hash + Objects.hashCode(this.zipcode);
-        hash = 97 * hash + Objects.hashCode(this.purchasePrice);
-        hash = 97 * hash + Objects.hashCode(this.vehicle);
-        hash = 97 * hash + Objects.hashCode(this.purchaseType);
-        hash = 97 * hash + Objects.hashCode(this.user);
+        int hash = 7;
+        hash = 29 * hash + this.salesId;
+        hash = 29 * hash + Objects.hashCode(this.name);
+        hash = 29 * hash + Objects.hashCode(this.phone);
+        hash = 29 * hash + Objects.hashCode(this.email);
+        hash = 29 * hash + Objects.hashCode(this.street1);
+        hash = 29 * hash + Objects.hashCode(this.street2);
+        hash = 29 * hash + Objects.hashCode(this.city);
+        hash = 29 * hash + Objects.hashCode(this.state);
+        hash = 29 * hash + Objects.hashCode(this.zipcode);
+        hash = 29 * hash + Objects.hashCode(this.purchasePrice);
+        hash = 29 * hash + Objects.hashCode(this.vehicle);
+        hash = 29 * hash + Objects.hashCode(this.purchaseType);
+        hash = 29 * hash + Objects.hashCode(this.user);
         return hash;
     }
 
@@ -163,7 +163,7 @@ public class Sales {
             return false;
         }
         final Sales other = (Sales) obj;
-        if (this.saleId != other.saleId) {
+        if (this.salesId != other.salesId) {
             return false;
         }
         if (!Objects.equals(this.name, other.name)) {
@@ -184,10 +184,10 @@ public class Sales {
         if (!Objects.equals(this.city, other.city)) {
             return false;
         }
-        if (!Objects.equals(this.state, other.state)) {
+        if (!Objects.equals(this.zipcode, other.zipcode)) {
             return false;
         }
-        if (!Objects.equals(this.zipcode, other.zipcode)) {
+        if (!Objects.equals(this.state, other.state)) {
             return false;
         }
         if (!Objects.equals(this.purchasePrice, other.purchasePrice)) {
