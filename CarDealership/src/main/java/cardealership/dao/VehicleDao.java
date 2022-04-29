@@ -13,16 +13,16 @@ import java.util.List;
  * @author Grant
  */
 public interface VehicleDao {
-    public Vehicle create(Vehicle vehicle);
+    Vehicle create(Vehicle vehicle);
 
-    public Vehicle getVehicleByVIN(String vin);
+    Vehicle getVehicleByVIN(String vin);
 
-    public List<Vehicle> getAllVehicles();
+    List<Vehicle> getAllVehicles();
 
-    public Vehicle deleteByVIN(String vin);
+    Vehicle deleteByVIN(String vin);
 
-    public boolean updateVehicle(Vehicle vehicle);
+    boolean updateVehicle(Vehicle vehicle);
 
     // TODO: add more logic.
-    public List<Vehicle> getAllVehiclesByMake(int makeId);
+    List<Vehicle> getAllVehiclesByMake(int makeId);
 }
