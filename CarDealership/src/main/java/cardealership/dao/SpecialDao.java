@@ -4,10 +4,26 @@
  */
 package cardealership.dao;
 
+import cardealership.dto.Special;
+
+
 /**
  *
- * @author Jeonghoon
+ * @author Nicole
  */
 public interface SpecialDao {
+    
+    
+
+    @Override
+    public String toString();
+
+    @Override
+    public boolean equals(Object obj);
+
+    @Override
+    public int hashCode();
+    
+    
 
 }
