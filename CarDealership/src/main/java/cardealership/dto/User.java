@@ -8,6 +8,6 @@ package cardealership.dto;
  *
  * @author Grant
  */
-public class users {
+public class User {
     
 }
