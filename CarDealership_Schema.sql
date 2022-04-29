@@ -3,12 +3,41 @@
  * Notes:
  * 		The naming scheme for foreign keys is: fk_childTable_parentTable
  */
- 
+
 -- Delete then create a clean database
 DROP DATABASE IF EXISTS cardealership;
 CREATE DATABASE IF NOT EXISTS cardealership;
 USE cardealership;
 
+/*
+ * Table Name: userRole
+ *
+ * Notes:
+ *		User Role can include customer, sales, admin. Fields are set appropriately
+ */
+ CREATE TABLE userRole(
+	userRoleId smallInt PRIMARY KEY,
+    name varchar(8) not null
+ );
+
+/*
+ * Table Name: users
+ *
+ * Notes:
+ *		userRoleId data type corrolates to userRole table data type.
+ */
+ CREATE TABLE user(
+	userId int PRIMARY KEY,
+    firstName varchar(32),
+    lastName varchar(32) not null,
+    email varchar(64) not null,
+    userPassword varchar(32) not null,
+    userRoleId smallInt not null,
+    CONSTRAINT fk_users_userRole
+		FOREIGN KEY (userRoleId)
+        REFERENCES userRole(userRoleId)
+ );
+ 
 /*
  * Table Name: make
  *
@@ -18,9 +47,12 @@ USE cardealership;
  */
 CREATE TABLE make(
 	makeId int PRIMARY KEY,
-    nameMake varchar(18),
-    dateAdded date,
-    userId int
+    nameMake varchar(18) not null,
+    dateAdded date not null,
+    userId int,
+    CONSTRAINT fk_make_user
+		FOREIGN KEY (userId)
+        REFERENCES user(userId)    
 );
 
 /*
@@ -33,7 +65,7 @@ CREATE TABLE make(
  */
  CREATE TABLE model(
 	modelId int PRIMARY KEY,
-    nameModel varchar(35),
+    nameModel varchar(35) not null,
     makeId int,
     CONSTRAINT fk_model_make
 		FOREIGN KEY (makeId)
@@ -48,10 +80,9 @@ CREATE TABLE make(
  */
  CREATE TABLE type(
 	typeId tinyInt PRIMARY KEY,
-    nameType varchar(4)
+    nameType varchar(4) not null
  );
- 
- 
+  
 /*
  * Table Name: bodyStyle
  *
@@ -60,11 +91,10 @@ CREATE TABLE make(
  */
  CREATE TABLE bodyStyle(
 	styleId smallInt PRIMARY KEY,
-    nameStyle varchar(5),
+    nameStyle varchar(5) not null,
     bodyDescription mediumtext
  );
- 
- 
+  
 /*
  * Table Name: transmission
  *
@@ -73,9 +103,8 @@ CREATE TABLE make(
  */
  CREATE TABLE transmission(
 	transmissionId tinyint PRIMARY KEY,
-    transmissionName varchar(9)
+    transmissionName varchar(9) not null
  );
-
 
 /*
  * Table Name: Color
@@ -87,7 +116,7 @@ CREATE TABLE make(
  */
  CREATE TABLE color(
 	colorId smallInt PRIMARY KEY,
-    nameColor varchar(20)
+    nameColor varchar(20) not null
  );
  
 
@@ -99,41 +128,9 @@ CREATE TABLE make(
  */
  CREATE TABLE status(
 	statusId smallInt PRIMARY KEY,
-    nameStatus varchar(9)
+    nameStatus varchar(9) not null
  );
- 
- 
-/*
- * Table Name: userRole
- *
- * Notes:
- *		User Role can include customer, sales, admin. Fields are set appropriately
- */
- CREATE TABLE userRole(
-	userRoleId smallInt PRIMARY KEY,
-    userRole varchar(8)
- );
-
-
-/*
- * Table Name: users
- *
- * Notes:
- *		userRoleId data type corrolates to userRole table data type.
- */
- CREATE TABLE users(
-	userId int PRIMARY KEY,
-    firstName varchar(32),
-    lastName varchar(32),
-    email varchar(64),
-    userPassword varchar(32),
-    userRoleId smallInt,
-    CONSTRAINT fk_users_userRole
-		FOREIGN KEY (userRoleId)
-        REFERENCES userRole(userRoleId)
- );
-
- 
+  
 /*
  * Table Name: vehicle
  *
@@ -146,35 +143,40 @@ CREATE TABLE make(
  */
  CREATE TABLE vehicle(
 	vin varchar(17) PRIMARY KEY,
-    mileage mediumInt,
-    salePrice int,
-    msrp int,
-    carYear smallInt,
-    carDescription mediumText,
-    pictureUrl text,
-    makeId int,
-    modelId int,
-    styleId int,
-    transmissionId tinyint,
-    colorId smallint,
-    typeId tinyint,
-    statusId smallint,
-    userId int
+    mileage mediumInt not null,
+    salePrice decimal(10,2) not null,
+    msrp decimal(10,2) not null,
+    carYear smallInt not null,
+    carDescription mediumText not null,
+    pictureUrl varchar(256),
+    modelId int not null,
+    styleId smallInt not null,
+    transmissionId tinyint not null,
+    colorId smallint not null,
+    typeId tinyint not null,
+    statusId smallint not null,
+    userId int not null,
+    
+    CONSTRAINT fk_vehicle_model FOREIGN KEY (modelId) REFERENCES make(makeId),
+	CONSTRAINT fk_vehicle_bodyStyle FOREIGN KEY (styleId) REFERENCES bodyStyle(styleId),
+	CONSTRAINT fk_vehicle_transmission FOREIGN KEY (transmissionId) REFERENCES transmission(transmissionId),
+    CONSTRAINT fk_vehicle_color FOREIGN KEY (colorId) REFERENCES color(colorId),
+	CONSTRAINT fk_vehicle_type FOREIGN KEY (typeId) REFERENCES type(typeId),
+	CONSTRAINT fk_vehicle_status FOREIGN KEY (statusId) REFERENCES status(statusId),
+    CONSTRAINT fk_vehicle_user FOREIGN KEY (userId) REFERENCES user(userId)    
  );
  
- 
- /*
+  /*
  * Table Name: purchaseType
  *
  * Notes: 
  *
  */
  CREATE TABLE purchaseType(
-	purchaseTypeId int PRIMARY KEY,
-    purchaseName varchar(15)
+	purchaseTypeId tinyint PRIMARY KEY,
+    purchaseName varchar(15) not null
  );
- 
- 
+  
  /*
  * Table Name: special
  *
@@ -183,12 +185,12 @@ CREATE TABLE make(
  */
  CREATE TABLE special(
 	specialId int PRIMARY KEY,
-    title varchar(50),
-    specialDescription mediumtext,
-    userId int,
-    CONSTRAINT fk_special_users
+    title varchar(50) not null,
+    specialDescription mediumtext not null,
+    userId int not null,
+    CONSTRAINT fk_special_user
 		FOREIGN KEY (userId)
-        REFERENCES users(userId)
+        REFERENCES user(userId)
  );
  
  
@@ -202,30 +204,29 @@ CREATE TABLE make(
  */
  CREATE TABLE salesInfo(
 	salesId int PRIMARY KEY,
-    nameSales varchar(32),
-    email varchar(32),
-    street1 varchar(32),
-    street2 varchar(32),
-    city  varchar(32),
-    state varchar(20),
-    zipcode varchar(10),
-    purchasePrice int,
-    vin varchar(17),
-    purchaseTypeId int,
-    userId int,
+    nameSales varchar(32) not null,
+    phone varchar(20) not null,
+    email varchar(64) not null,
+    street1 varchar(64) not null,
+    street2 varchar(64),
+    city  varchar(32) not null,
+    state char(2) not null,
+    zipcode varchar(10) not null,
+    purchasePrice decimal(10,2) not null,
+    vin varchar(17) not null,
+    purchaseTypeId tinyint not null,
+    userId int not null,
     CONSTRAINT fk_salesInfo_vehicle
 		FOREIGN KEY (vin)
         REFERENCES vehicle(vin),
     CONSTRAINT fk_salesInfo_purchasetype
 		FOREIGN KEY (purchaseTypeId)
-        REFERENCES purchasetype(purchaseTypeId),   
-    CONSTRAINT fk_salesInfo_users
+        REFERENCES purchaseType(purchaseTypeId),   
+    CONSTRAINT fk_salesInfo_user
 		FOREIGN KEY (userId)
-        REFERENCES users(userId)
+        REFERENCES user(userId)
  );
- 
- 
- 
+  
 /*
  * Table Name:
  *
@@ -234,8 +235,8 @@ CREATE TABLE make(
  */
  CREATE TABLE contact(
 	contactId int,
-    contactName varchar(50),
-    email varchar(32),
-    phone varchar(12),
-    message mediumText
+    contactName varchar(50) not null,
+    email varchar(64) not null,
+    phone varchar(20),
+    message mediumText not null
  );
