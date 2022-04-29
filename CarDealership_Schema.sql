@@ -7,6 +7,7 @@
 -- Delete then create a clean database
 DROP DATABASE IF EXISTS cardealership;
 CREATE DATABASE IF NOT EXISTS cardealership;
+
 USE cardealership;
 
 /*
@@ -16,9 +17,10 @@ USE cardealership;
  *		User Role can include customer, sales, admin. Fields are set appropriately
  */
  CREATE TABLE userRole(
-	userRoleId smallInt PRIMARY KEY,
+	userRoleId smallInt auto_increment PRIMARY KEY,
     name varchar(8) not null
  );
+
 
 /*
  * Table Name: users
@@ -27,7 +29,7 @@ USE cardealership;
  *		userRoleId data type corrolates to userRole table data type.
  */
  CREATE TABLE user(
-	userId int PRIMARY KEY,
+	userId int auto_increment PRIMARY KEY,
     firstName varchar(32),
     lastName varchar(32) not null,
     email varchar(64) not null,
@@ -38,6 +40,7 @@ USE cardealership;
         REFERENCES userRole(userRoleId)
  );
  
+
 /*
  * Table Name: make
  *
@@ -46,7 +49,7 @@ USE cardealership;
  *      found on https://en.wikipedia.org/wiki/List_of_automobile_manufacturers.
  */
 CREATE TABLE make(
-	makeId int PRIMARY KEY,
+	makeId int auto_increment PRIMARY KEY,
     nameMake varchar(18) not null,
     dateAdded date not null,
     userId int,
@@ -54,6 +57,7 @@ CREATE TABLE make(
 		FOREIGN KEY (userId)
         REFERENCES user(userId)    
 );
+
 
 /*
  * Table Name: model
@@ -64,13 +68,14 @@ CREATE TABLE make(
  *          https://www.kbb.com/car-make-model-list/new/view-all/
  */
  CREATE TABLE model(
-	modelId int PRIMARY KEY,
+	modelId int auto_increment PRIMARY KEY,
     nameModel varchar(35) not null,
     makeId int,
     CONSTRAINT fk_model_make
 		FOREIGN KEY (makeId)
         REFERENCES make(makeId)
  );
+
  
 /*
  * Table Name: type
@@ -79,10 +84,11 @@ CREATE TABLE make(
  * 		Car types include: New, Used. Fields are set accordingly.
  */
  CREATE TABLE type(
-	typeId tinyInt PRIMARY KEY,
+	typeId tinyInt auto_increment PRIMARY KEY,
     nameType varchar(4) not null
  );
-  
+ 
+ 
 /*
  * Table Name: bodyStyle
  *
@@ -90,10 +96,11 @@ CREATE TABLE make(
  *		Body Styles include: Car, SUV, Truck, Van. Fields are set accordingly.
  */
  CREATE TABLE bodyStyle(
-	styleId smallInt PRIMARY KEY,
+	styleId smallInt auto_increment PRIMARY KEY,
     nameStyle varchar(5) not null,
     bodyDescription mediumtext
  );
+
   
 /*
  * Table Name: transmission
@@ -102,9 +109,10 @@ CREATE TABLE make(
  *		Transmissions include: Automatic, manual. Fields are set accordingly
  */
  CREATE TABLE transmission(
-	transmissionId tinyint PRIMARY KEY,
+	transmissionId tinyint auto_increment PRIMARY KEY,
     transmissionName varchar(9) not null
  );
+ 
 
 /*
  * Table Name: Color
@@ -115,10 +123,9 @@ CREATE TABLE make(
  *		are set accordingly
  */
  CREATE TABLE color(
-	colorId smallInt PRIMARY KEY,
+	colorId smallInt auto_increment PRIMARY KEY,
     nameColor varchar(20) not null
  );
- 
 
 /*
  * Table Name: status
@@ -127,9 +134,10 @@ CREATE TABLE make(
  *		Status includes: Sold, Available
  */
  CREATE TABLE status(
-	statusId smallInt PRIMARY KEY,
+	statusId smallInt auto_increment PRIMARY KEY,
     nameStatus varchar(9) not null
  );
+
   
 /*
  * Table Name: vehicle
@@ -166,17 +174,19 @@ CREATE TABLE make(
     CONSTRAINT fk_vehicle_user FOREIGN KEY (userId) REFERENCES user(userId)    
  );
  
+ 
   /*
  * Table Name: purchaseType
  *
  * Notes: 
- *
+ *		Bank Finance, Cash, Dealer Finance
  */
  CREATE TABLE purchaseType(
-	purchaseTypeId tinyint PRIMARY KEY,
+	purchaseTypeId tinyint auto_increment PRIMARY KEY,
     purchaseName varchar(15) not null
  );
-  
+ 
+
  /*
  * Table Name: special
  *
@@ -184,7 +194,7 @@ CREATE TABLE make(
  *
  */
  CREATE TABLE special(
-	specialId int PRIMARY KEY,
+	specialId int auto_increment PRIMARY KEY,
     title varchar(50) not null,
     specialDescription mediumtext not null,
     userId int not null,
@@ -192,7 +202,22 @@ CREATE TABLE make(
 		FOREIGN KEY (userId)
         REFERENCES user(userId)
  );
+
  
+/*
+ * Table Name:
+ *
+ * Notes: 
+ *		zipcode has a max length of 10 becuase some zipcodes include a dash and an extra
+ *			four digits. Ex: 12345-6789
+ *
+ */
+ CREATE TABLE UsState (
+   stateId tinyint auto_increment PRIMARY KEY,
+   stateName varchar(32) not null,
+   stateAbbrev char(2) not null
+);
+
  
  /*
  * Table Name:
@@ -203,19 +228,22 @@ CREATE TABLE make(
  *
  */
  CREATE TABLE salesInfo(
-	salesId int PRIMARY KEY,
+	salesId int auto_increment PRIMARY KEY,
     nameSales varchar(32) not null,
     phone varchar(20) not null,
     email varchar(64) not null,
     street1 varchar(64) not null,
     street2 varchar(64),
     city  varchar(32) not null,
-    state char(2) not null,
+    stateId tinyint not null,
     zipcode varchar(10) not null,
     purchasePrice decimal(10,2) not null,
     vin varchar(17) not null,
     purchaseTypeId tinyint not null,
     userId int not null,
+    CONSTRAINT fk_salesInfo_UsState
+		FOREIGN KEY (stateId)
+        REFERENCES UsState(stateId), 
     CONSTRAINT fk_salesInfo_vehicle
 		FOREIGN KEY (vin)
         REFERENCES vehicle(vin),
@@ -226,7 +254,8 @@ CREATE TABLE make(
 		FOREIGN KEY (userId)
         REFERENCES user(userId)
  );
-  
+ 
+ 
 /*
  * Table Name:
  *
@@ -234,9 +263,11 @@ CREATE TABLE make(
  *
  */
  CREATE TABLE contact(
-	contactId int,
+	contactId int auto_increment PRIMARY KEY,
     contactName varchar(50) not null,
     email varchar(64) not null,
     phone varchar(20),
     message mediumText not null
  );
+ 
+ 
