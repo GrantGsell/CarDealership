@@ -4,10 +4,27 @@
  */
 package cardealership.dao;
 
+import cardealership.dto.Sales;
+import java.util.List;
+
 /**
  *
  * @author Jeonghoon
  */
 public interface SalesDao {
 
+    Sales createSales(Sales sales);
+
+    List<Sales> getAllSales();
+
+    Sales getSalesById(int id);
+
+    Sales deleteSalesById(int id);
+
+    boolean updateSales(Sales sales);
+
+    // TODO: we may need following methods
+    List<Sales> getAllSalesByUser(int userId);
+
+    Sales getSalesByVin(String vin);
 }

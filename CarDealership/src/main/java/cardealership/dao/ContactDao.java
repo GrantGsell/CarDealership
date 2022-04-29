@@ -4,10 +4,22 @@
  */
 package cardealership.dao;
 
+import cardealership.dto.Contact;
+import java.util.List;
+
 /**
  *
  * @author Jeonghoon
  */
 public interface ContactDao {
+    Contact createContact(Contact contact);
 
+    List<Contact> getAllContacts();
+
+    Contact getContactById(int id);
+
+    Contact deleteContactById(int id);
+
+    // TODO: we may not need this method.
+    boolean updateContactById(Contact contact);
 }
