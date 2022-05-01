@@ -8,8 +8,8 @@ import java.util.Objects;
  */
 public class Status {
     // Fields
-    int statusId;
-    String nameStatus;
+    private int statusId;
+    private String nameStatus;
     
     
     // Setters

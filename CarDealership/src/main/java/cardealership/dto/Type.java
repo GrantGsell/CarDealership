@@ -8,8 +8,8 @@ import java.util.Objects;
  */
 public class Type {
     // Fields
-    int typeId;
-    String nameType;
+    private int typeId;
+    private String nameType;
     
     
     // Setters

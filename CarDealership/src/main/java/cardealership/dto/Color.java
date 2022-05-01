@@ -8,8 +8,8 @@ import java.util.Objects;
  */
 public class Color {
     // Fields
-    int colorId;
-    String nameColor;
+    private int colorId;
+    private String nameColor;
     
     
     // Setters

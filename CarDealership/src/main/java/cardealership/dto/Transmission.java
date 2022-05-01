@@ -7,8 +7,8 @@ import java.util.Objects;
  * @author Grant
  */
 public class Transmission {
-    int transmissionId;
-    String transmissionName;
+    private int transmissionId;
+    private String transmissionName;
 
     
     // Setters

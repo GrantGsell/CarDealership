@@ -8,9 +8,9 @@ import java.util.Objects;
  */
 public class BodyStyle {
     // Fields
-    int styleId;
-    String nameStyle;
-    String description;
+    private int styleId;
+    private String nameStyle;
+    private String description;
 
     
     // Setters

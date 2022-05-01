@@ -8,10 +8,10 @@ import java.util.Objects;
  */
 public class Make {
     // Fields
-    int makeId;
-    String nameMake;
-    LocalDate date;
-    int userId;
+    private int makeId;
+    private String nameMake;
+    private LocalDate date;
+    private int userId;
     
     
     // Setters
