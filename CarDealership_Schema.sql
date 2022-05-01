@@ -97,8 +97,8 @@ CREATE TABLE make(
  */
  CREATE TABLE bodyStyle(
 	styleId smallInt auto_increment PRIMARY KEY,
-    nameStyle varchar(5) not null,
-    bodyDescription mediumtext
+    nameStyle varchar(5) not null
+    -- bodyDescription mediumtext
  );
 
   
