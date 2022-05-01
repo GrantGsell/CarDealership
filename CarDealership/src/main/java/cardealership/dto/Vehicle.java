@@ -8,24 +8,24 @@ import java.util.Objects;
  */
 public class Vehicle {
     // Fields
-    int vin;
-    int mileage;
-    int salePrice;
-    int msrp;
-    int carYear;
-    String carDescription;
-    String pictureUrl;
-    Model model;
-    BodyStyle style;
-    Transmission transmission;
-    Color color;
-    Type type;
-    Status status;
-    Make make;
-    int userId;
+    private String vin;
+    private int mileage;
+    private int salePrice;
+    private int msrp;
+    private int carYear;
+    private String carDescription;
+    private String pictureUrl;
+    private Model model;
+    private BodyStyle style;
+    private Transmission transmission;
+    private Color color;
+    private Type type;
+    private Status status;
+    private Make make;
+    private int userId;
 
     // Setters
-    public void setVin(int vin) {
+    public void setVin(String vin) {
         this.vin = vin;
     }
     
@@ -83,7 +83,7 @@ public class Vehicle {
     
     
     // Getters
-    public int getVin() {
+    public String getVin() {
         return vin;
     }
 
@@ -144,21 +144,21 @@ public class Vehicle {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 37 * hash + this.vin;
-        hash = 37 * hash + this.mileage;
-        hash = 37 * hash + this.salePrice;
-        hash = 37 * hash + this.msrp;
-        hash = 37 * hash + this.carYear;
-        hash = 37 * hash + Objects.hashCode(this.carDescription);
-        hash = 37 * hash + Objects.hashCode(this.pictureUrl);
-        hash = 37 * hash + Objects.hashCode(this.model);
-        hash = 37 * hash + Objects.hashCode(this.style);
-        hash = 37 * hash + Objects.hashCode(this.transmission);
-        hash = 37 * hash + Objects.hashCode(this.color);
-        hash = 37 * hash + Objects.hashCode(this.type);
-        hash = 37 * hash + Objects.hashCode(this.status);
-        hash = 37 * hash + Objects.hashCode(this.make);
-        hash = 37 * hash + this.userId;
+        hash = 89 * hash + Objects.hashCode(this.vin);
+        hash = 89 * hash + this.mileage;
+        hash = 89 * hash + this.salePrice;
+        hash = 89 * hash + this.msrp;
+        hash = 89 * hash + this.carYear;
+        hash = 89 * hash + Objects.hashCode(this.carDescription);
+        hash = 89 * hash + Objects.hashCode(this.pictureUrl);
+        hash = 89 * hash + Objects.hashCode(this.model);
+        hash = 89 * hash + Objects.hashCode(this.style);
+        hash = 89 * hash + Objects.hashCode(this.transmission);
+        hash = 89 * hash + Objects.hashCode(this.color);
+        hash = 89 * hash + Objects.hashCode(this.type);
+        hash = 89 * hash + Objects.hashCode(this.status);
+        hash = 89 * hash + Objects.hashCode(this.make);
+        hash = 89 * hash + this.userId;
         return hash;
     }
     
@@ -176,9 +176,6 @@ public class Vehicle {
             return false;
         }
         final Vehicle other = (Vehicle) obj;
-        if (this.vin != other.vin) {
-            return false;
-        }
         if (this.mileage != other.mileage) {
             return false;
         }
@@ -192,6 +189,9 @@ public class Vehicle {
             return false;
         }
         if (this.userId != other.userId) {
+            return false;
+        }
+        if (!Objects.equals(this.vin, other.vin)) {
             return false;
         }
         if (!Objects.equals(this.carDescription, other.carDescription)) {
@@ -219,5 +219,6 @@ public class Vehicle {
             return false;
         }
         return Objects.equals(this.make, other.make);
-    }    
+    }
+    
 }

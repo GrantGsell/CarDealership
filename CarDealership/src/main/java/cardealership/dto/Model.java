@@ -67,10 +67,9 @@ public class Model {
         if (this.modelId != other.modelId) {
             return false;
         }
-        if (this.nameModel != other.nameModel) {
+        if (this.makeId != other.makeId) {
             return false;
         }
-        return this.makeId == other.makeId;
-    }
-    
+        return Objects.equals(this.nameModel, other.nameModel);
+    }  
 }

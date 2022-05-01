@@ -10,7 +10,6 @@ public class BodyStyle {
     // Fields
     private int styleId;
     private String nameStyle;
-    private String description;
 
     
     // Setters
@@ -20,10 +19,6 @@ public class BodyStyle {
     
     public void setNameStyle(String nameStyle) {
         this.nameStyle = nameStyle;
-    }
-    
-    public void setDescription(String description) {
-        this.description = description;
     }
     
     
@@ -36,10 +31,6 @@ public class BodyStyle {
         return nameStyle;
     }   
 
-    public String getDescription() {
-        return description;
-    }
-
     
     // HashCode override
     @Override
@@ -47,7 +38,6 @@ public class BodyStyle {
         int hash = 3;
         hash = 29 * hash + this.styleId;
         hash = 29 * hash + Objects.hashCode(this.nameStyle);
-        hash = 29 * hash + Objects.hashCode(this.description);
         return hash;
     }
 
@@ -68,10 +58,7 @@ public class BodyStyle {
         if (this.styleId != other.styleId) {
             return false;
         }
-        if (!Objects.equals(this.nameStyle, other.nameStyle)) {
-            return false;
-        }
-        return Objects.equals(this.description, other.description);
+        return Objects.equals(this.nameStyle, other.nameStyle);
     }
     
     
