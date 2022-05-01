@@ -15,12 +15,13 @@ public class Vehicle {
     int carYear;
     String carDescription;
     String pictureUrl;
-    int modelId;
-    int styleId;
-    int transmissionId;
-    int colorId;
-    int typeId;
-    int statusId;
+    Model model;
+    BodyStyle style;
+    Transmission transmission;
+    Color color;
+    Type type;
+    Status status;
+    Make make;
     int userId;
 
     // Setters
@@ -52,31 +53,31 @@ public class Vehicle {
         this.pictureUrl = pictureUrl;
     }
     
-    public void setModelId(int modelId) {
-        this.modelId = modelId;
+    public void setModel(Model model){
+        this.model = model;
     }
     
-    public void setStyleId(int styleId) {
-        this.styleId = styleId;
+    public void setStyle(BodyStyle style) {
+        this.style = style;
     }
     
-    public void setTransmissionId(int transmissionId) {
-        this.transmissionId = transmissionId;
+    public void setTransmission(Transmission transmission) {
+        this.transmission = transmission;
     }
     
-    public void setColorId(int colorId) {
-        this.colorId = colorId;
+    public void setColor(Color color) {
+        this.color = color;
     }
     
-    public void setTypeId(int typeId) {
-        this.typeId = typeId;
+    public void setType(Type type) {
+        this.type = type;
     }
     
-    public void setStatusId(int statusId) {
-        this.statusId = statusId;
+    public void setStatus(Status status) {
+        this.status = status;
     }
     
-    public void setUserId(int userId) {
+    public void setUser(int userId) {
         this.userId = userId;
     }
     
@@ -110,28 +111,28 @@ public class Vehicle {
         return pictureUrl;
     }
 
-    public int getModelId() {
-        return modelId;
+    public Model getModel() {
+        return model;
     }   
 
-    public int getStyleId() {
-        return styleId;
+    public BodyStyle getStyle() {
+        return style;
     }   
 
-    public int getTransmissionId() {
-        return transmissionId;
+    public Transmission getTransmission() {
+        return transmission;
     }    
 
-    public int getColorId() {
-        return colorId;
+    public Color getColor() {
+        return color;
     }
 
-    public int getTypeId() {
-        return typeId;
+    public Type getType() {
+        return type;
     }
 
-    public int getStatusId() {
-        return statusId;
+    public Status getStatus() {
+        return status;
     }
 
     public int getUserId() {
@@ -142,25 +143,26 @@ public class Vehicle {
     // HashCode Override
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 17 * hash + this.vin;
-        hash = 17 * hash + this.mileage;
-        hash = 17 * hash + this.salePrice;
-        hash = 17 * hash + this.msrp;
-        hash = 17 * hash + this.carYear;
-        hash = 17 * hash + Objects.hashCode(this.carDescription);
-        hash = 17 * hash + Objects.hashCode(this.pictureUrl);
-        hash = 17 * hash + this.modelId;
-        hash = 17 * hash + this.styleId;
-        hash = 17 * hash + this.transmissionId;
-        hash = 17 * hash + this.colorId;
-        hash = 17 * hash + this.typeId;
-        hash = 17 * hash + this.statusId;
-        hash = 17 * hash + this.userId;
+        int hash = 7;
+        hash = 37 * hash + this.vin;
+        hash = 37 * hash + this.mileage;
+        hash = 37 * hash + this.salePrice;
+        hash = 37 * hash + this.msrp;
+        hash = 37 * hash + this.carYear;
+        hash = 37 * hash + Objects.hashCode(this.carDescription);
+        hash = 37 * hash + Objects.hashCode(this.pictureUrl);
+        hash = 37 * hash + Objects.hashCode(this.model);
+        hash = 37 * hash + Objects.hashCode(this.style);
+        hash = 37 * hash + Objects.hashCode(this.transmission);
+        hash = 37 * hash + Objects.hashCode(this.color);
+        hash = 37 * hash + Objects.hashCode(this.type);
+        hash = 37 * hash + Objects.hashCode(this.status);
+        hash = 37 * hash + Objects.hashCode(this.make);
+        hash = 37 * hash + this.userId;
         return hash;
     }
-
     
+
     // Equals Override
     @Override
     public boolean equals(Object obj) {
@@ -189,33 +191,33 @@ public class Vehicle {
         if (this.carYear != other.carYear) {
             return false;
         }
-        if (this.modelId != other.modelId) {
-            return false;
-        }
-        if (this.styleId != other.styleId) {
-            return false;
-        }
-        if (this.transmissionId != other.transmissionId) {
-            return false;
-        }
-        if (this.colorId != other.colorId) {
-            return false;
-        }
-        if (this.typeId != other.typeId) {
-            return false;
-        }
-        if (this.statusId != other.statusId) {
-            return false;
-        }
         if (this.userId != other.userId) {
             return false;
         }
         if (!Objects.equals(this.carDescription, other.carDescription)) {
             return false;
         }
-        return Objects.equals(this.pictureUrl, other.pictureUrl);
-    }
-    
-    
-    
+        if (!Objects.equals(this.pictureUrl, other.pictureUrl)) {
+            return false;
+        }
+        if (!Objects.equals(this.model, other.model)) {
+            return false;
+        }
+        if (!Objects.equals(this.style, other.style)) {
+            return false;
+        }
+        if (!Objects.equals(this.transmission, other.transmission)) {
+            return false;
+        }
+        if (!Objects.equals(this.color, other.color)) {
+            return false;
+        }
+        if (!Objects.equals(this.type, other.type)) {
+            return false;
+        }
+        if (!Objects.equals(this.status, other.status)) {
+            return false;
+        }
+        return Objects.equals(this.make, other.make);
+    }    
 }
