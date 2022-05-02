@@ -77,8 +77,12 @@ public class Vehicle {
         this.status = status;
     }
     
-    public void setUser(int userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public void setMake(Make make) {
+        this.make = make;
     }
     
     
@@ -137,6 +141,10 @@ public class Vehicle {
 
     public int getUserId() {
         return userId;
+    }
+     
+    public Make getMake() {
+        return make;
     }
 
     
