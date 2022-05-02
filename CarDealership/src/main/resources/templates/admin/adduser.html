@@ -38,7 +38,7 @@
                             <label for="inputUserRole">Role</label>
                             <!-- TODO: implement with database -->
                             <select id="inputUserRole" class="form-control">
-                                <option selected>Admin</option>
+                                <option th:each="role : ${userRoles}" th:value="${role.userRoleId}" th:text="${role.name}" th:selected="${role.userRoleId==3}"></option>
                             </select>
                         </div>
                     </div>

@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HomeController {
 
-//    @Autowired
-//    SpecialDao specialDao;
+    @Autowired
+    SpecialDao specialDao;
 
     // Handling Get Request for multiple value
     @RequestMapping(value = {"home", "home/index"}, method = RequestMethod.GET)
@@ -35,7 +35,7 @@ public class HomeController {
 
     @GetMapping("home/specials")
     public String getSpecialsPage(Model model) {
-//        model.addAttribute("specials", specialDao.getAllSpecials());
+        model.addAttribute("specials", specialDao.getAllSpecial());
         return "home/specials";
     }
 }

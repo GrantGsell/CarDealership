@@ -4,6 +4,7 @@
  */
 package cardealership.dao;
 
+import cardealership.dto.State;
 import cardealership.dto.User;
 import cardealership.dto.UserRole;
 import java.sql.ResultSet;
@@ -14,7 +15,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -46,7 +46,7 @@ public class UserDaoDB implements UserDao {
         @Override
         public UserRole mapRow(ResultSet rs, int index) throws SQLException {
             UserRole role = new UserRole();
-            role.setUserId(rs.getInt("userRoleId"));
+            role.setUserRoleId(rs.getInt("userRoleId"));
             role.setName(rs.getString("name"));
 
             return role;
@@ -66,7 +66,10 @@ public class UserDaoDB implements UserDao {
     @Override
     public List<User> getAllUsers() {
         final String SELECT_ALL_USERS = "SELECT * FROM user";
-        return jdbc.query(SELECT_ALL_USERS, new UserMapper());
+        List<User> userList = jdbc.query(SELECT_ALL_USERS, new UserMapper());
+
+        associateUserRoleForUserList(userList);
+        return userList;
     }
 
     @Override
@@ -91,14 +94,34 @@ public class UserDaoDB implements UserDao {
     public void updateUser(User user) {
         final String UPDATE_USER = "UPDATE user SET "
                 + "firstName = ?, lastName = ?, "
-                + "email = ?, password = ? "
+                + "email = ?, userPassword = ?, "
+                + "userRoleId = ? "
                 + "WHERE userId = ?";
         jdbc.update(UPDATE_USER,
                 user.getFirstName(),
                 user.getLastName(),
                 user.getEmail(),
                 user.getPassword(),
+                user.getRole().getUserRoleId(),
                 user.getUserId()
         );
+    }
+
+    @Override
+    public List<UserRole> getAllUserRoles() {
+        final String SELECT_ALL_USER_ROLES = "SELECT * FROM userRole";
+        return jdbc.query(SELECT_ALL_USER_ROLES, new UserRoleMapper());
+    }
+
+    private UserRole getUserRoleForUser(int userId) {
+        final String SELECT_USER_ROLE_FOR_USER = "SELECT r.* FROM userRole r "
+                + "JOIN user u ON r.userRoleId = u.userRoleId WHERE u.userId = ?";
+        return jdbc.queryForObject(SELECT_USER_ROLE_FOR_USER, new UserRoleMapper(), userId);
+    }
+
+    private void associateUserRoleForUserList(List<User> userList) {
+        userList.forEach(user -> {
+            user.setRole(getUserRoleForUser(user.getUserId()));
+        });
     }
 }

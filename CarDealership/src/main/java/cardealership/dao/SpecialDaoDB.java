@@ -4,6 +4,7 @@
  */
 package cardealership.dao;
 
+import cardealership.dao.UserDaoDB.UserMapper;
 import cardealership.dto.Special;
 import cardealership.dto.User;
 import java.sql.ResultSet;
@@ -55,13 +56,27 @@ public class SpecialDaoDB implements SpecialDao {
     @Override
     public List<Special> getAllSpecial() {
         final String SELECT_ALL_SPECIAL = "SELECT * FROM special";
-        return jdbc.query(SELECT_ALL_SPECIAL, new SpecialMapper());
+        List<Special> specialList = jdbc.query(SELECT_ALL_SPECIAL, new SpecialMapper());
+        associateUserForSpecialList(specialList);
+        return specialList;
     }
 
     @Override
     public void deleteSpecialById(int id) {
         final String DELETE_SPECIAL = "DELETE FROM special WHERE specialId = ?";
         jdbc.update(DELETE_SPECIAL, id);
+    }
+
+    private User getUserForSpecial(int specialId) {
+        final String SELECT_USER_ROLE_FOR_USER = "SELECT u.* FROM user u "
+                + "JOIN special s ON u.userId = s.userId WHERE s.specialId = ?";
+        return jdbc.queryForObject(SELECT_USER_ROLE_FOR_USER, new UserMapper(), specialId);
+    }
+
+    private void associateUserForSpecialList(List<Special> specialList) {
+        specialList.forEach(special -> {
+            special.setUser(getUserForSpecial(special.getSpecialId()));
+        });
     }
 
 }

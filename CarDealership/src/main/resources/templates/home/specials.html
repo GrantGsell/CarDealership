@@ -19,16 +19,15 @@
             <!-- 
                 Custom contents area for Specials list 
             -->
-            <div class="card p-3">
+            <div th:each="special : ${specials}" class="card p-3 mb-3">
                 <div class="row g-0">
                     <div class="col-md-2 text-center">
                         <img src="/img/dollar-96-icons8.png" class="img-fluid rounded-start" style="max-width: 120px" alt="dollar icon">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title">Special Title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <!--<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>-->
+                            <h5 class="card-title" th:text="${special.title}"></h5>
+                            <p class="card-text" th:text="${special.description}"></p>
                         </div>
                     </div>
                 </div>

@@ -12,15 +12,15 @@ import java.util.Objects;
  */
 public class UserRole {
     
-    private int userId;
+    private int userRoleId;
     private String name;
 
-    public int getUserId() {
-        return userId;
+    public int getUserRoleId() {
+        return userRoleId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUserRoleId(int userRoleId) {
+        this.userRoleId = userRoleId;
     }
 
     public String getName() {
@@ -34,7 +34,7 @@ public class UserRole {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 19 * hash + this.userId;
+        hash = 19 * hash + this.userRoleId;
         hash = 19 * hash + Objects.hashCode(this.name);
         return hash;
     }
@@ -51,7 +51,7 @@ public class UserRole {
             return false;
         }
         final UserRole other = (UserRole) obj;
-        if (this.userId != other.userId) {
+        if (this.userRoleId != other.userRoleId) {
             return false;
         }
         return Objects.equals(this.name, other.name);

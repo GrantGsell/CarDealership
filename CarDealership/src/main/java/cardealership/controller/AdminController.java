@@ -4,7 +4,10 @@
  */
 package cardealership.controller;
 
+import cardealership.dao.UserDao;
+import cardealership.dao.VehicleDao;
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +19,12 @@ import org.springframework.web.bind.annotation.PostMapping;
  */
 @Controller
 public class AdminController {
+
+    @Autowired
+    VehicleDao vehicleDao;
+
+    @Autowired
+    UserDao userDao;
 
     // vehicles
     @GetMapping("admin/vehicles")
@@ -43,6 +52,7 @@ public class AdminController {
 
     @GetMapping("admin/adduser")
     public String getAddUserPage(Model model) {
+        model.addAttribute("userRoles", userDao.getAllUserRoles());
         return "admin/adduser";
     }
 

@@ -5,6 +5,7 @@
 package cardealership.dao;
 
 import cardealership.dto.User;
+import cardealership.dto.UserRole;
 import java.util.List;
 
 /**
@@ -19,6 +20,8 @@ public interface UserDao {
     public void deleteUserById(int id);
 
     public void updateUser(User user);
-    
+
     public User getUserById(int id);
+
+    public List<UserRole> getAllUserRoles();
 }
