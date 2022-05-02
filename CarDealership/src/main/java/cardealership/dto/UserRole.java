@@ -10,7 +10,7 @@ import java.util.Objects;
  *
  * @author nicolemagpantay
  */
-class UserRole {
+public class UserRole {
     
     private int userId;
     private String name;

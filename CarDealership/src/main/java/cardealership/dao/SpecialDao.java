@@ -5,25 +5,18 @@
 package cardealership.dao;
 
 import cardealership.dto.Special;
-
+import java.util.List;
 
 /**
  *
  * @author Nicole
  */
 public interface SpecialDao {
-    
-    
 
-    @Override
-    public String toString();
+    public Special createSpecial(Special special);
 
-    @Override
-    public boolean equals(Object obj);
+    public List<Special> getAllSpecial();
 
-    @Override
-    public int hashCode();
-    
-    
+    public void deleteSpecialById(int id);
 
 }
