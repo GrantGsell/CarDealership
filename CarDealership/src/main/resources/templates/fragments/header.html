@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <body>        
+        <header th:fragment="header" class="container d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start py-3 mb-4 border-bottom">
+            <a href="/home" class="d-flex align-items-center mb-2 mb-md-0 text-dark text-decoration-none">
+                <img class="bi me-2" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAADKUlEQVRYhe2Wy2tcdRTHP+c+5nHbTCaJEknpogi2XWhEUYhN6TgLN1kVHwVpKaE7d1114R+gO7vr3nZVQYRCd6aCQkSkFNqFCG2oGGqU0TiTzON37/0dF+m87tyZpJ24ar+LC7/fued8v/f3O48Lz/GsQ4ZaVKV8rbaA2kMjI7jxaAbL+srZ6VVEdM8CFq5rPteq3RS0BEm/xHogbspaWLGmtvTd8pFmkstLE5Az1WVRLVUfVgjrTZD+sNqzUhmyDyCQyftMHZ4pO5mJZeBKkstJEyDKkqk1CeutNPMTwTQMra0morKUZh8Q8OF1dYET+0HeK0LRk49jjxZQCatvApPRttk3Aa26ASj8bSpvJG1e+Wr1HdQeUldjP279EMdSiuOI2IT7JiAyITayiCul976sPQyJFsW1LpZ1D/QWohlRJXK8X1B9ENXNYDKPAwVTb5EvBKci7AWBo6iAWOOgPOh59RiwuJ/330Y7D4CjPdv3PQ/nVKh2URx1Vb1PBEqZiQA/yHbl95Xh8KPZKcP0viCeC1BA4ltY54o6xJEfft+p4vK16mmUr3dtPE/TiBJrUTn97bkXvoHeKlAupXzU/wOxHa7eMnwNwHfh83LAjTMTvH8sMzbXB8dz3Phoms/eLeA7OweuyHyagDzA67Meb815BL5wfj7LuDj/akDgC2/P+czPdjp/Pk0AAGubMdvhzr3d/XOXSbcH3PsrAmDLKGubg/G6SXi1+jhblJm8cKTocmcjIrI72/U//iWOLO2kaj/VGRxAjiMUXioC4DswP+uxthlTaXT9V86+KDBkGlYaSqUR9St1BFNtgPQWm3amobZnocCBmYMdv9AqPz8a3lVTp2EassVg1O9LV6gIQfHAXsOmn0AanIzHwbkpwq0GqulXAJAt5HD9gaE3vgCA7GSe7GSuf3PXRjQanStwtzaeyHEcuNtdrs4JFH+6jJl6GaR70eH0K180D59Y7XdPJIJjR5Llfvtxwa/8erGzoRb/n/uDAsTUyG7c6Xd+dHv15qdLX41k2AVnPj6HilwcZu+tgrWEzViV38chBxBH14Hk71WS6zmeYfwHkLpBRP5PnK4AAAAASUVORK5CYII="/>
+            </a>
+
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 mb-md-0">
+                <li><a href="/home/index" class="nav-link px-2 link-dark">Home</a></li>
+                <li><a href="/inventory/new" class="nav-link px-2 link-dark">New Inventory</a></li>
+                <li><a href="/inventory/used" class="nav-link px-2 link-dark">Used Inventory</a></li>
+                <li><a href="/home/specials" class="nav-link px-2 link-dark">Specials</a></li>
+                <li><a href="/home/contact" class="nav-link px-2 link-dark">Contact</a></li>
+                <!-- 
+                    TODO: Should be hidden unless users log in properly 
+                -->
+                <li><a href="/sales/index" class="nav-link px-2 link-dark">Sales</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link link-dark dropdown-toggle" href="#" id="adminDropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">Admin</a>
+                    <ul class="dropdown-menu" aria-labelledby="adminDropdownMenu">
+                        <li><a class="dropdown-item" href="/admin/vehicles">Vehicles</a></li>
+                        <li><a class="dropdown-item" href="#">Users</a></li>
+                        <li><a class="dropdown-item" href="#">Make</a></li>
+                        <li><a class="dropdown-item" href="#">Model</a></li>
+                        <li><a class="dropdown-item" href="#">Reports</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- 
+                TODO: Should be hidden unless users log in properly 
+            -->            
+            <ul class="nav">
+                <li class="nav-item"><a href="#" class="nav-link link-dark px-0">Change Password</a></li>
+                <li class="nav-item"><span class="nav-link link-dark px-1">|</span></li>
+                <li class="nav-item"><a href="#" class="nav-link link-dark px-0">Logout</a></li>
+            </ul>
+        </header>
+    </body>
+</html>
