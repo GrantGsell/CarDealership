@@ -11,30 +11,30 @@ import java.util.Objects;
  * @author Jeonghoon
  */
 public class PurchaseType {
-    private int purchaseId;
-    private String name;
+    private int purchaseTypeId;
+    private String purchaseName;
 
-    public int getPurchaseId() {
-        return purchaseId;
+    public int getPurchaseTypeId() {
+        return purchaseTypeId;
     }
 
-    public void setPurchaseId(int purchaseId) {
-        this.purchaseId = purchaseId;
+    public void setPurchaseTypeId(int purchaseTypeId) {
+        this.purchaseTypeId = purchaseTypeId;
     }
 
-    public String getName() {
-        return name;
+    public String getPurchaseName() {
+        return purchaseName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPurchaseName(String purchaseName) {
+        this.purchaseName = purchaseName;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 53 * hash + this.purchaseId;
-        hash = 53 * hash + Objects.hashCode(this.name);
+        hash = 53 * hash + this.purchaseTypeId;
+        hash = 53 * hash + Objects.hashCode(this.purchaseName);
         return hash;
     }
 
@@ -50,9 +50,9 @@ public class PurchaseType {
             return false;
         }
         final PurchaseType other = (PurchaseType) obj;
-        if (this.purchaseId != other.purchaseId) {
+        if (this.purchaseTypeId != other.purchaseTypeId) {
             return false;
         }
-        return Objects.equals(this.name, other.name);
+        return Objects.equals(this.purchaseName, other.purchaseName);
     }
 }

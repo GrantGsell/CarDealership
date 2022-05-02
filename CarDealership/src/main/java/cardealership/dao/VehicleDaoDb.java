@@ -165,10 +165,24 @@ public class VehicleDaoDb implements VehicleDao{
 
     @Override
     public List<Vehicle> getAllVehiclesByMake(int makeId) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        final String sql = "SELECT * FROM vehicle "
+                + "INNER JOIN bodystyle USING(styleId) "
+                + "INNER JOIN model USING(modelId) "
+                + "INNER JOIN transmission USING(transmissionId) "
+                + "INNER JOIN type USING(typeId) "
+                + "INNER JOIN color USING(colorID) "
+                + "INNER JOIN status USING(statusId) "
+                + "INNER JOIN make USING(makeId) "
+                + "WHERE makeId = ?;";
+        
+        // Execute sql statement
+        return jdbc.query(sql, new VehicleMapper(), makeId);
     }
     
     
+    /**
+     * 
+     */
     public static final class VehicleMapper implements RowMapper<Vehicle> {
 
         @Override

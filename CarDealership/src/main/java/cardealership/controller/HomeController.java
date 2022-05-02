@@ -4,7 +4,10 @@
  */
 package cardealership.controller;
 
+import cardealership.dao.SpecialDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,6 +19,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HomeController {
 
+//    @Autowired
+//    SpecialDao specialDao;
+
     // Handling Get Request for multiple value
     @RequestMapping(value = {"home", "home/index"}, method = RequestMethod.GET)
     public String getHomePage() {
@@ -23,12 +29,13 @@ public class HomeController {
     }
 
     @GetMapping("home/contact")
-    public String GetContactPage() {
+    public String getContactPage() {
         return "home/contact";
     }
 
     @GetMapping("home/specials")
-    public String GetSpecialsPage() {
+    public String getSpecialsPage(Model model) {
+//        model.addAttribute("specials", specialDao.getAllSpecials());
         return "home/specials";
     }
 }

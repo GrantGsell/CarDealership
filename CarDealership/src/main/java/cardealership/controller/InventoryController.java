@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class InventoryController {
 
     @GetMapping("inventory/new")
-    public String GetNewInventoryPage() {
+    public String getNewInventoryPage() {
         return "inventory/new";
     }
 
     @GetMapping("inventory/used")
-    public String GetUsedInventoryPage() {
+    public String getUsedInventoryPage() {
         return "inventory/used";
     }
 }
