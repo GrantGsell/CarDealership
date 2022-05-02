@@ -49,7 +49,7 @@ public class SalesDaoDB implements SalesDao {
         @Override
         public State mapRow(ResultSet rs, int index) throws SQLException {
             State state = new State();
-            state.setStateId(rs.getInt(rs.getInt("stateId")));
+            state.setStateId(rs.getInt("stateId"));
             state.setStateName(rs.getString("stateName"));
             state.setStateAbbrev(rs.getString("stateAbbrev"));
 
@@ -62,8 +62,8 @@ public class SalesDaoDB implements SalesDao {
         @Override
         public PurchaseType mapRow(ResultSet rs, int index) throws SQLException {
             PurchaseType purchaseType = new PurchaseType();
-            purchaseType.setPurchaseId(rs.getInt(rs.getInt("stateId")));
-            purchaseType.setName(rs.getString("stateName"));
+            purchaseType.setPurchaseTypeId(rs.getInt("purchaseTypeId"));
+            purchaseType.setPurchaseName(rs.getString("purchaseName"));
 
             return purchaseType;
         }
@@ -86,7 +86,7 @@ public class SalesDaoDB implements SalesDao {
                 sales.getZipcode(),
                 sales.getPurchasePrice(),
                 sales.getVehicle().getVin(),
-                sales.getPurchaseType().getPurchaseId(),
+                sales.getPurchaseType().getPurchaseTypeId(),
                 sales.getUser().getUserId()
         );
 
@@ -150,7 +150,7 @@ public class SalesDaoDB implements SalesDao {
                 sales.getZipcode(),
                 sales.getPurchasePrice(),
                 sales.getVehicle().getVin(),
-                sales.getPurchaseType().getPurchaseId(),
+                sales.getPurchaseType().getPurchaseTypeId(),
                 sales.getUser().getUserId()
         );
     }
@@ -176,6 +176,24 @@ public class SalesDaoDB implements SalesDao {
         } catch (DataAccessException ex) {
             return null;
         }
+    }
+
+    @Override
+    public List<PurchaseType> getAllPurchaseType() {
+        final String GET_ALL_PURCHASE_TYPE = "SELECT * FROM purchaseType";
+        List<PurchaseType> purchaseTypeList
+                = jdbc.query(GET_ALL_PURCHASE_TYPE, new PurchaseTypeMapper());
+
+        return purchaseTypeList;
+    }
+
+    @Override
+    public List<State> getAllState() {
+        final String GET_ALL_STATE = "SELECT * FROM UsState";
+        List<State> stateList
+                = jdbc.query(GET_ALL_STATE, new StateMapper());
+
+        return stateList;
     }
 
     private void associateOtherFieldsForSales(Sales sales) {

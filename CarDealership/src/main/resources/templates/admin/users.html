@@ -13,21 +13,13 @@
 
             <!-- custom contents area for title -->
             <div class="my-3">
-                <h2>Vehicles</h2>
-                <a href="/admin/addvehicle" type="button" class="btn btn-outline-primary">Add a new Vehicle</a>
+                <h2>Users</h2>
+                <a href="/admin/adduser" type="button" class="btn btn-outline-primary">Add a new User</a>
             </div>
-
-            <div th:replace="fragments/quicksearch.html :: quicksearch-div"></div>
 
             <!-- 
-                Custom contents area for search result 
-                - No search results should be shown by default
-                = The search should utilize an AJAX call via jQuery.
+                Display user list 
             -->
-            <div class="mt-5">
-                <h2>Search Results</h2>
-                <p> TODO: need to implement search for Admin/Vehicles </p>
-            </div>
 
             <!-- footer -->
             <div th:replace="fragments/footer.html :: footer"></div>

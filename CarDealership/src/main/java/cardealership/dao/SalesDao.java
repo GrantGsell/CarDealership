@@ -4,7 +4,9 @@
  */
 package cardealership.dao;
 
+import cardealership.dto.PurchaseType;
 import cardealership.dto.Sales;
+import cardealership.dto.State;
 import java.util.List;
 
 /**
@@ -27,4 +29,8 @@ public interface SalesDao {
     List<Sales> getAllSalesByUser(int userId);
 
     Sales getSalesByVin(String vin);
+
+    List<PurchaseType> getAllPurchaseType();
+
+    List<State> getAllState();
 }
