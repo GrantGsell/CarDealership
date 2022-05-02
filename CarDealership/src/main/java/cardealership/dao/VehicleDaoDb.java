@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -35,21 +36,24 @@ public class VehicleDaoDb implements VehicleDao{
      */
     @Override
     public Vehicle create(Vehicle vehicle) {
-        // Create a sql statement
-        final String sql = "INSERT INTO vehicle(vin, mileage, salePrice, msrp, "
-                + "carYear, carDescription, pictureUrl, modelId, styleId, "
-                + "transmissionId, colorId, typeId, statusId, userId) "
-                + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        
-        // Execute the statement
-        jdbc.update(sql, vehicle.getVin(), vehicle.getMileage(), 
-                vehicle.getSalePrice(), vehicle.getMsrp(), vehicle.getCarYear(),
-                vehicle.getCarDescription(), vehicle.getPictureUrl(), 
-                vehicle.getModel().getModelId(), vehicle.getStyle().getStyleId(),
-                vehicle.getTransmission().getTransmissionId(), 
-                vehicle.getColor().getColorId(), vehicle.getType().getTypeId(),
-                vehicle.getStatus().getStatusId(), vehicle.getUserId());
-        
+        try{
+            // Create a sql statement
+            final String sql = "INSERT INTO vehicle(vin, mileage, salePrice, msrp, "
+                    + "carYear, carDescription, pictureUrl, modelId, styleId, "
+                    + "transmissionId, colorId, typeId, statusId, userId) "
+                    + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            
+            // Execute the statement
+            jdbc.update(sql, vehicle.getVin(), vehicle.getMileage(),
+                    vehicle.getSalePrice(), vehicle.getMsrp(), vehicle.getCarYear(),
+                    vehicle.getCarDescription(), vehicle.getPictureUrl(),
+                    vehicle.getModel().getModelId(), vehicle.getStyle().getStyleId(),
+                    vehicle.getTransmission().getTransmissionId(),
+                    vehicle.getColor().getColorId(), vehicle.getType().getTypeId(),
+                    vehicle.getStatus().getStatusId(), vehicle.getUserId());
+        }catch(DataAccessException ex){
+            return null;
+        }
         // Return the newly created vehicle object
         return getVehicleByVIN(vehicle.getVin());
     }
@@ -64,19 +68,23 @@ public class VehicleDaoDb implements VehicleDao{
      */
     @Override
     public Vehicle getVehicleByVIN(String vin) {
-        // Create SQL statement
-        final String sql = "SELECT * FROM vehicle "
-                + "INNER JOIN bodystyle USING(styleId) "
-                + "INNER JOIN model USING(modelId) "
-                + "INNER JOIN transmission USING(transmissionId) "
-                + "INNER JOIN type USING(typeId) "
-                + "INNER JOIN color USING(colorID) "
-                + "INNER JOIN status USING(statusId) "
-                + "INNER JOIN make USING(makeId) "
-                + "WHERE vin = ?;";
-        
-        // Execute the query
-        return jdbc.queryForObject(sql, new VehicleMapper(), vin);
+        try{
+            // Create SQL statement
+            final String sql = "SELECT * FROM vehicle "
+                    + "INNER JOIN bodystyle USING(styleId) "
+                    + "INNER JOIN model USING(modelId) "
+                    + "INNER JOIN transmission USING(transmissionId) "
+                    + "INNER JOIN type USING(typeId) "
+                    + "INNER JOIN color USING(colorID) "
+                    + "INNER JOIN status USING(statusId) "
+                    + "INNER JOIN make USING(makeId) "
+                    + "WHERE vin = ?;";
+            
+            // Execute the query
+            return jdbc.queryForObject(sql, new VehicleMapper(), vin);
+        }catch(DataAccessException ex){
+            return null;
+        }
     }
 
     
@@ -98,7 +106,8 @@ public class VehicleDaoDb implements VehicleDao{
                 + "INNER JOIN make USING(makeId);";
         
         // Return the entire list
-        return jdbc.query(sql, new VehicleMapper());
+        List<Vehicle> test =  jdbc.query(sql, new VehicleMapper());
+        return test;
     }
 
     
