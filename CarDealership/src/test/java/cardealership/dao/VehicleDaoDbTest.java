@@ -205,7 +205,7 @@ public class VehicleDaoDbTest {
         vehicle0.setCarYear(2002);
         vehicle0.setCarDescription("");
         vehicle0.setPictureUrl("");
-        vehicle0.setUser(1);
+        vehicle0.setUserId(1);
         
         // Create, populate a Model Object
         Model model = new Model();
@@ -240,7 +240,7 @@ public class VehicleDaoDbTest {
         status.setNameStatus("Available");
         
         // Create, populate a Make Object   
-        String str = "2015-03-15";
+        String str = "2022-01-31";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate dateTime = LocalDate.parse(str, formatter);
         Make make = new Make();
@@ -256,6 +256,7 @@ public class VehicleDaoDbTest {
         vehicle0.setColor(color);
         vehicle0.setType(type);
         vehicle0.setStatus(status);
+        vehicle0.setMake(make);
         
         
         // Create vehicle 1
@@ -273,7 +274,7 @@ public class VehicleDaoDbTest {
         vehicle1.setCarYear(2022);
         vehicle1.setCarDescription("");
         vehicle1.setPictureUrl("");
-        vehicle1.setUser(1);
+        vehicle1.setUserId(1);
         
         // Create, populate a Model Object
         model = new Model();
@@ -307,7 +308,7 @@ public class VehicleDaoDbTest {
         status.setNameStatus("Available");
         
         // Create, populate a Make Object   
-        str = "2022-03-15";
+        str = "2021-12-09";
         formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         dateTime = LocalDate.parse(str, formatter);
         make = new Make();
@@ -323,7 +324,7 @@ public class VehicleDaoDbTest {
         vehicle1.setColor(color);
         vehicle1.setType(type);
         vehicle1.setStatus(status);
-        
+        vehicle1.setMake(make);
         
         // Create vehicle 2
         // Create a Vehicle Object 
@@ -340,7 +341,7 @@ public class VehicleDaoDbTest {
         vehicle2.setCarYear(2022);
         vehicle2.setCarDescription("");
         vehicle2.setPictureUrl("");
-        vehicle2.setUser(1);
+        vehicle2.setUserId(1);
         
         // Create, populate a Model Object
         model = new Model();
@@ -374,7 +375,7 @@ public class VehicleDaoDbTest {
         status.setNameStatus("Available");
         
         // Create, populate a Make Object   
-        str = "2022-03-15";
+        str = "2021-12-09";
         formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         dateTime = LocalDate.parse(str, formatter);
         make = new Make();
@@ -390,6 +391,7 @@ public class VehicleDaoDbTest {
         vehicle2.setColor(color);
         vehicle2.setType(type);
         vehicle2.setStatus(status);
+        vehicle2.setMake(make);
         
         
         // Create a list of the three vehicle objects
