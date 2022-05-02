@@ -139,7 +139,28 @@ public class VehicleDaoDb implements VehicleDao{
     
     @Override
     public boolean updateVehicle(Vehicle vehicle) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try{
+            // Create a sql statement
+            final String sql = "UPDATE vehicle SET vin = ?, mileage = ?, "
+                    + "salePrice = ?, msrp = ?, carYear = ?, carDescription = ?, "
+                    + "pictureUrl = ?, modelId = ?, styleId = ?, transmissionId = ?, "
+                    + "colorId = ?, typeId = ?, statusId = ?, userId = ? "
+                    + "WHERE vin = ?";
+            
+            // Execute the statement
+            jdbc.update(sql, vehicle.getVin(), vehicle.getMileage(),
+                    vehicle.getSalePrice(), vehicle.getMsrp(), vehicle.getCarYear(),
+                    vehicle.getCarDescription(), vehicle.getPictureUrl(),
+                    vehicle.getModel().getModelId(), vehicle.getStyle().getStyleId(),
+                    vehicle.getTransmission().getTransmissionId(),
+                    vehicle.getColor().getColorId(), vehicle.getType().getTypeId(),
+                    vehicle.getStatus().getStatusId(), vehicle.getUserId(),
+                    vehicle.getVin());
+        }catch(DataAccessException ex){
+            return false;
+        }
+        // If reached object was updated successfully
+        return true;
     }
 
     @Override
