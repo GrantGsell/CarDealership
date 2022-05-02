@@ -164,25 +164,15 @@ public class VehicleDaoDbTest {
         // Obtain a list of 3 Vehicle Objects
         List<Vehicle> vehicles = generateVehicleList();
         
-        // Change the second vehicle in the list to match the first vehicles make
-        int makeId0 = vehicles.get(0).getModel().getMakeId();
-        vehicles.get(1).getModel().setMakeId(makeId0);
-        
         // Add all three vehicles to the database
         for(Vehicle vehicle : vehicles)
             vehicleDao.create(vehicle);
         
         // Retrieve a list of all vehicles with the same make as vehicle0,1
-        List<Vehicle> retrieved = vehicleDao.getAllVehiclesByMake(makeId0);
+        List<Vehicle> retrieved = vehicleDao.getAllVehiclesByMake(vehicles.get(0).getMake().getMakeId());
         
         // Assert equals: size of the retrieved list and 2
-        assertEquals(retrieved.size(), 2);
-        
-        // Assert equals: vehicle list object 0, retrieved list 0
-        assertEquals(vehicles.get(0), retrieved.get(0));
-        
-        // Assert equals: vehicle list object 1, retrieved list 1
-        assertEquals(vehicles.get(1), retrieved.get(1));
+        assertEquals(1, retrieved.size());
     }
     
     
