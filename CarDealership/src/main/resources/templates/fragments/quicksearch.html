@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:fragment="datepicker-headerfiles">
+        <!-- Bootstrap datepicker CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
+              crossorigin="anonymous"/>
+
+        <!-- Bootstrap datepicker JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
+                crossorigin="anonymous"></script>
+                
+        <!-- custom js files for datepicker -->
+        <script src="/js/datepicker.js"></script>
+    </head>    
+    <body>        
+        <div th:fragment="quicksearch-div" class="card">
+            <div class="card-body">
+                <h4 class="card-title">Quick Search</h4>
+                <form class="row g-2 mt-2">
+                    <div class="col-md-4">
+                        <input type="input" class="form-control" id="keyword" placeholder="Enter make, model, or year">
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row g-2">
+                            <label class="col-sm-2 col-form-label" style="text-align: right">Price:</label>
+                            <div class="col-sm-5">
+                                <input type="number" class="form-control text-center" min="0" max="1000000" step="10" name="minPrice" id="minPrice" placeholder="No Min"/>
+                            </div>
+                            <div class="col-sm-5">
+                                <input type="number" class="form-control text-center" min="0" max="1000000" step="10" name="maxPrice" id="maxPrice" placeholder="No Max"/>
+                            </div>
+                        </div>
+                    </div>                    
+                    <div class="col-md-4">
+                        <div class="row g-2">
+                            <label class="col-sm-2 col-form-label" style="text-align: right">Year:</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="datepicker form-control text-center" name="minYear" id="minYear" placeholder="No Min"/>
+                            </div>
+                            <div class="col-sm-5">
+                                <input type="text" class="datepicker form-control text-center" name="maxYear" id="maxYear" placeholder="No Max"/>
+                            </div>
+                        </div>
+                    </div>                    
+                    <div class="col-12 text-center mt-3">
+                        <button id="search" class="btn btn-primary col-3">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
+

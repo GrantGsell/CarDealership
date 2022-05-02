@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <!-- include common script files from head.html -->
+        <th:block th:include="fragments/head.html :: headerfiles"></th:block>
+        <title>Guild Car: home</title>
+        <th:block th:include="fragments/quicksearch.html :: datepicker-headerfiles"></th:block>
+    </head>
+    <body>
+        <div class="container d-flex flex-column min-vh-100">
+            <!-- header and nav menu  -->
+            <div th:replace="fragments/header.html :: header"> </div>
+
+            <!-- custom contents area for title -->
+            <div class="my-3">
+                <h2>Admin</h2>
+                <button type="button" class="btn btn-outline-primary">Add a new Vehicle</button>
+            </div>
+
+            <div th:replace="fragments/quicksearch.html :: quicksearch-div"></div>
+
+            <!-- 
+                Custom contents area for search result 
+                - No search results should be shown by default
+                = The search should utilize an AJAX call via jQuery.
+            -->
+            <div class="mt-5">
+                <h2>Search Results</h2>
+                <p> TODO: need to implement search for Admin/Vehicles </p>
+            </div>
+
+            <!-- footer -->
+            <div th:replace="fragments/footer.html :: footer"></div>
+        </div>
+
+        <!-- custom javascript file location -->
+    </body>
+</html>

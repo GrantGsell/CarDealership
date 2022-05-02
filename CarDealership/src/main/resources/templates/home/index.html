@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+    <!-- include common script files from head.html -->
+    <th:block th:include="fragments/head.html :: headerfiles"></th:block>
+    <title>Guild Car: home</title>
+</head>
+<body>
+    <div class="container d-flex flex-column min-vh-100">
+        <!-- header and nav menu  -->
+        <div th:replace="fragments/header.html :: header"> </div>
+
+        <!-- custom contents area for each page -->
+        <div class="h-80 p-5 mb-4 bg-light rounded-3">
+            <div class="container-fluid col-md-10">
+                <h1 class="display-5 fw-bold">Custom jumbotron</h1>
+                <p class="fs-4">Using a series of utilities, you can create this jumbotron, just like the one in previous versions of Bootstrap. Check out the examples below for how you can remix and restyle it to your liking.</p>
+                <button class="btn btn-primary btn-lg" type="button">Example button</button>
+            </div>
+        </div>
+
+        <div class="my-3">
+            <h2>Featured Vehicles</h2>
+        </div>
+
+        <div class="row row-cols-1 row-cols-md-3 g-4 px-3 mb-5">
+            <div class="col">
+                <div class="card h-100">
+                    <img src="/img/no-photo-available-icon-8.jpg" class="rounded mx-auto d-block" style="width: 240px" alt="No Photo Available">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">2019 Ford</h5>
+                        <p class="card-text">$18,000</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="/img/no-photo-available-icon-8.jpg" class="rounded mx-auto d-block" style="width: 240px" alt="No Photo Available">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">2020 Honda</h5>
+                        <p class="card-text">$20,000</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- footer -->
+        <div th:replace="fragments/footer.html :: footer"></div>
+    </div>
+</body>
+</html>
