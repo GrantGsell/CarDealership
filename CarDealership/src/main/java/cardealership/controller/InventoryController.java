@@ -21,17 +21,17 @@ public class InventoryController {
     
     @GetMapping("inventory/new")
     public String getNewInventoryPage(Model model) {
-        List<Vehicle> numbers = vehicleDao.getAllVehicles();
+        List<Vehicle> vehicles = vehicleDao.getAllVehicles();
         
-        model.addAttribute("numberList", numbers);
+        model.addAttribute("vehicleList", vehicles);
         return "inventory/new";
     }
 
     @GetMapping("inventory/used")
     public String getUsedInventoryPage(Model model) {
-        List<Vehicle> numbers = vehicleDao.getAllVehicles();
+        List<Vehicle> vehicles = vehicleDao.getAllVehicles();
         
-        model.addAttribute("numberList", numbers);
+        model.addAttribute("vehicleList", vehicles);
         
         return "inventory/used";
     }
