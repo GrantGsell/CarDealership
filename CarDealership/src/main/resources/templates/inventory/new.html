@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <!-- include common script files from head.html -->
         <th:block th:include="fragments/head.html :: headerfiles"></th:block>
@@ -25,7 +26,74 @@
             -->
             <div class="mt-5">
                 <h2>Search Results</h2>
-                <p> TODO: need to implement search for new vehicle </p>
+                <!-- <p> TODO: need to implement search for new vehicle </p> -->
+                <div class="col mb-3" th:each="number : ${numberList}">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <!-- Left Column -->
+                                <div class="col-sm-2">
+                                    <!-- Year Make Model -->
+                                    <div class="row">
+                                        <span th:text="${number}"> </span>
+                                    </div>
+                                    <!-- Picture -->
+                                    <div class="row">
+                                        <span th:text="${number}"> </span>
+                                    </div>
+                                </div>
+                                <!-- Right Column -->
+                                <div class="col">
+                                    <!-- First row data -->
+                                    <div class="row">
+                                        <!-- Body Style data -->
+                                        <div class="col-4">
+                                            <span th:text="${number}"> </span>
+                                        </div>
+                                        <!-- Interior data -->
+                                        <div class="col-4">
+                                            <span th:text="${number}"> </span>
+                                        </div>
+                                        <!-- Sale Price data -->
+                                        <div class="col-4">
+                                            <span th:text="${number}"> </span>
+                                        </div>
+                                    </div>
+                                    <!-- Second row data -->
+                                    <div class="row">
+                                        <!-- Transmission data -->
+                                        <div class="col-4">
+                                            <span th:text="${number}"> </span>
+                                        </div>
+                                        <!-- Mileage data -->
+                                        <div class="col-4">
+                                            <span th:text="${number}"> </span>
+                                        </div>
+                                        <!-- MSRP data -->
+                                        <div class="col-4">
+                                            <span th:text="${number}"> </span>
+                                        </div>
+                                    </div>
+                                    <!-- Third row data -->
+                                    <div class="row">
+                                        <!-- Color data -->
+                                        <div class="col-4">
+                                            <span th:text="${number}"> </span>
+                                        </div>
+                                        <!-- VIN data -->
+                                        <div class="col-4">
+                                            <span th:text="${number}"> </span>
+                                        </div>
+                                        <!-- Details Button -->
+                                        <div class="col-4">
+                                            <span th:text="${number}"> </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- footer -->
@@ -33,5 +101,6 @@
         </div>
 
         <!-- custom javascript file location -->
+        <script src="/js/vehicle.js"></script>
     </body>
 </html>
