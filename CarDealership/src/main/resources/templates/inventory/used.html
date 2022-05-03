@@ -24,91 +24,10 @@
                 - No search results should be shown by default
                 = The search should utilize an AJAX call via jQuery.
             -->
-            <div class="mt-5">
+            <div class="my-5 d-none" id="resultContainer">
                 <h2>Search Results</h2>
-                <!-- <p> TODO: need to implement search for new vehicle </p> -->
-                <div class="col mb-3" th:each="vehicle : ${vehicleList}">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <!-- Left Column -->
-                                <div class="col-sm-2">
-                                    <!-- Year Make Model -->
-                                    <div class="row">
-                                        <span th:text="${vehicle.carYear} + ' ' + ${vehicle.make.nameMake} + ' ' + ${vehicle.model.nameModel} " > </span>
-                                    </div>
-                                    <!-- Picture -->
-                                    <div class="row">
-                                        <img src="/img/no-photo-available-icon-8.jpg" class="img-fluid rounded-start" alt="No photo" style="width: 160px" />
-                                    </div>
-                                </div>
-                                <!-- Right Column -->
-                                <div class="col">
-                                    <!-- First row data -->
-                                    <div class="row">
-                                        <!-- Body Style data -->
-                                        <div class="col-4">
-                                            <p>Body Style:
-                                                <span th:text="${vehicle.style.nameStyle}"></span>
-                                            </p>
-                                        </div>
-                                        <!-- Interior data -->
-                                        <div class="col-4">
-                                            <p>Interior:
-                                                <span th:text="${vehicle.interior.nameColor}"></span>
-                                            </p>
-                                        </div>
-                                        <!-- Sale Price data -->
-                                        <div class="col-4">
-                                            <p>Sale Price:
-                                                <span th:text="${vehicle.salePrice}"></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <!-- Second row data -->
-                                    <div class="row">
-                                        <!-- Transmission data -->
-                                        <div class="col-4">
-                                            <p>Transmission:
-                                                <span th:text="${vehicle.transmission.transmissionName}"> </span>
-                                            </p>
-                                        </div>
-                                        <!-- Mileage data -->
-                                        <div class="col-4">
-                                            <p>Mileage:
-                                                <span th:text="${vehicle.mileage}"> </span>
-                                            </p>
-                                        </div>
-                                        <!-- MSRP data -->
-                                        <div class="col-4">
-                                            <p>MSRP:
-                                                <span th:text="${vehicle.msrp}"> </span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <!-- Third row data -->
-                                    <div class="row">
-                                        <!-- Color data -->
-                                        <div class="col-4">
-                                            <p>Color:
-                                                <span th:text="${vehicle.color.nameColor}"></span>
-                                            </p>
-                                        </div>
-                                        <!-- VIN data -->
-                                        <div class="col-4">
-                                            <p>VIN:
-                                                <span th:text="${vehicle.vin}"></span>
-                                            </p>
-                                        </div>
-                                        <!-- Details Button -->
-                                        <div class="col-4">
-                                            <button type="button" class="btn btn-primary">Details</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div id="resultList">
+                    
                 </div>
             </div>
 
@@ -117,5 +36,6 @@
         </div>
 
         <!-- custom javascript file location -->
+        <script src="/js/vehicle.js"></script>
     </body>
 </html>
