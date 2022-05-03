@@ -39,14 +39,14 @@ insert into transmission (transmissionName)
   
  insert into color (nameColor)
 	values ('White'), ('Black'), ('Silver'), ('Gold'), ('Red');
- 
+
  insert into status (nameStatus)
 	values ('Sold'), ('Available');
 
- insert into vehicle (vin, mileage, salePrice, msrp, carYear, carDescription, modelId, styleId, transmissionId, colorId, typeId, statusId, userId)
-	values ('1234567890ABCDEFG', 100000, 10000.00, 11000.00, 2016, 'Good condition', 1, 1, 1, 1, 1, 1, 1),
-    ('2234567890ABCDEFG', 50000, 18900.00, 20000.00, 2018, 'Good performance', 1, 2, 1, 4, 1, 2, 1),
-    ('3234567890ABCDEFG', 10000, 25555.00, 27000.00, 2021, 'Almost new', 1, 2, 1, 3, 2, 2, 1);
+ insert into vehicle (vin, mileage, salePrice, msrp, carYear, carDescription, modelId, styleId, transmissionId, colorId, typeId, statusId, userId, interiorColorId)
+	values ('1234567890ABCDEFG', 100000, 10000.00, 11000.00, 2016, 'Good condition', 1, 1, 1, 1, 1, 1, 1, 5),
+    ('2234567890ABCDEFG', 50000, 18900.00, 20000.00, 2018, 'Good performance', 1, 2, 1, 4, 1, 2, 1, 5),
+    ('3234567890ABCDEFG', 10000, 25555.00, 27000.00, 2021, 'Almost new', 1, 2, 1, 3, 2, 2, 1, 5);
 
 insert into purchaseType (purchaseName)
 	values ('Bank Finance'), ('Cash'), ('Dealer Finance');
@@ -121,3 +121,13 @@ select * from salesInfo s
 	join UsState u on s.stateId = u.stateId
     where s.stateId = u.stateId
 ;
+
+
+SELECT * FROM vehicle 
+INNER JOIN bodystyle USING(styleId) 
+INNER JOIN model USING(modelId)
+INNER JOIN transmission USING(transmissionId) 
+INNER JOIN type USING(typeId) 
+INNER JOIN color USING(colorID) 
+INNER JOIN status USING(statusId)
+INNER JOIN make USING(makeId);
