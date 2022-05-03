@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <!-- include common script files from head.html -->
+        <th:block th:include="fragments/head.html :: headerfiles"></th:block>
+        <title>Guild Car: home</title>
+        <th:block th:include="fragments/quicksearch.html :: datepicker-headerfiles"></th:block>
+    </head>
+    <body>
+        <div class="container d-flex flex-column min-vh-100">
+            <!-- header and nav menu  -->
+            <div th:replace="fragments/header.html :: header"> </div>
+
+            <!-- custom contents area for title -->
+            <div class="my-3">
+                <h2>Vehicle Details</h2>
+            </div>
+
+            <!-- 
+                Custom contents area for search result 
+                - No search results should be shown by default
+                = The search should utilize an AJAX call via jQuery.
+            -->    
+            <div class="card mb-3">
+                <h5 class="mx-5 mt-2" th:text = "${vehicle.carYear} + ' ' + ${vehicle.make.nameMake} + ' ' + ${vehicle.model.nameModel}"></h5>
+                <div class="row g-0">
+                    <div class="col-md-3 text-center">
+                        <img src="/img/no-photo-available-icon-8.jpg" class="img-fluid rounded-start" alt="No photo" style="width: 160px" />
+                    </div>
+                    <div class="col-md-9">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-2" style="text-align: right"><strong>Body Style :</strong></div>
+                                <div class="col-md-2" th:text = '${vehicle.style.nameStyle}'></div>
+                                <div class="col-md-2" style="text-align: right"><strong>Interior :</strong></div>
+                                <div class="col-md-2" th:text = '${vehicle.interior.nameColor}'></div>
+                                <div class="col-md-2" style="text-align: right"><strong>Sales Price :</strong></div>
+                                <div class="col-md-2" th:text = '${vehicle.salePrice}'></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2" style="text-align: right"><strong>Trans :</strong></div>
+                                <div class="col-md-2" th:text = '${vehicle.transmission.transmissionName}'></div>
+                                <div class="col-md-2" style="text-align: right"><strong>Mileage :</strong></div>
+                                <div class="col-md-2" th:text = '${vehicle.mileage}'></div>
+                                <div class="col-md-2" style="text-align: right"><strong>MSRP :</strong></div>
+                                <div class="col-md-2" th:text = '${vehicle.msrp}'></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2" style="text-align: right"><strong>Color :</strong></div>
+                                <div class="col-md-2" th:text = '${vehicle.color.nameColor}'></div>
+                                <div class="col-md-2" style="text-align: right"><strong>VIN # :</strong></div>
+                                <div class="col-md-6" th:text = '${vehicle.vin}'></div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-md-2" style="text-align: left"><strong>Description:</strong></div>
+                                <div class="col-lg-auto" th:text = '${vehicle.carDescription}'></div>
+                                <div class="col-md-2">
+                                    <a href="/inventory/details/${vehicle.vin}" type="button" class="btn btn-outline-dark px-5 pull-right">Contact</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- footer -->
+            <div th:replace="fragments/footer.html :: footer"></div>
+            
+        </div>
+        <!-- custom javascript file location -->
+        <script src="/js/vehicle.js"></script>
+    </body>
+</html>
