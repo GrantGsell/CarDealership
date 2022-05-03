@@ -94,6 +94,7 @@ public class InventoryController {
     
     @GetMapping("inventory/details/{vin}")
     public String inventoryDetailPage(@PathVariable String vin, Model model){
+        model.addAttribute(vehicleDao.getVehicleByVIN(vin));
         return "inventory/details";
     }
 }
