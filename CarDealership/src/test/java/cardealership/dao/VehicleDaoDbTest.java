@@ -219,6 +219,11 @@ public class VehicleDaoDbTest {
         color.setColorId(3);
         color.setNameColor("Silver");
         
+        // Create, populate a color object fo the interior
+        Color interior = new Color();
+        interior.setColorId(5);
+        interior.setNameColor("Red");
+        
         // Create, populate a Type Object
         Type type = new Type();
         type.setTypeId(2);
@@ -247,6 +252,7 @@ public class VehicleDaoDbTest {
         vehicle0.setType(type);
         vehicle0.setStatus(status);
         vehicle0.setMake(make);
+        vehicle0.setInterior(interior);
         
         
         // Create vehicle 1
@@ -287,6 +293,11 @@ public class VehicleDaoDbTest {
         color.setColorId(5);
         color.setNameColor("Red");
         
+        // Create, populate a color object fo the interior
+        interior = new Color();
+        interior.setColorId(5);
+        interior.setNameColor("Red");
+        
         // Create, populate a Type Object
         type = new Type();
         type.setTypeId(2);
@@ -315,6 +326,7 @@ public class VehicleDaoDbTest {
         vehicle1.setType(type);
         vehicle1.setStatus(status);
         vehicle1.setMake(make);
+        vehicle1.setInterior(interior);
         
         // Create vehicle 2
         // Create a Vehicle Object 
@@ -354,6 +366,11 @@ public class VehicleDaoDbTest {
         color.setColorId(4);
         color.setNameColor("Gold");
         
+        // Create, populate a color object fo the interior
+        interior = new Color();
+        interior.setColorId(5);
+        interior.setNameColor("Red");
+        
         // Create, populate a Type Object
         type = new Type();
         type.setTypeId(1);
@@ -382,6 +399,7 @@ public class VehicleDaoDbTest {
         vehicle2.setType(type);
         vehicle2.setStatus(status);
         vehicle2.setMake(make);
+        vehicle2.setInterior(interior);
         
         
         // Create a list of the three vehicle objects

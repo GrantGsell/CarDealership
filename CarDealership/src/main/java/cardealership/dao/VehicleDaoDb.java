@@ -40,8 +40,8 @@ public class VehicleDaoDb implements VehicleDao{
             // Create a sql statement
             final String sql = "INSERT INTO vehicle(vin, mileage, salePrice, msrp, "
                     + "carYear, carDescription, pictureUrl, modelId, styleId, "
-                    + "transmissionId, colorId, typeId, statusId, userId) "
-                    + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    + "transmissionId, colorId, typeId, statusId, userId, interiorColorId) "
+                    + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             
             // Execute the statement
             jdbc.update(sql, vehicle.getVin(), vehicle.getMileage(),
@@ -50,7 +50,7 @@ public class VehicleDaoDb implements VehicleDao{
                     vehicle.getModel().getModelId(), vehicle.getStyle().getStyleId(),
                     vehicle.getTransmission().getTransmissionId(),
                     vehicle.getColor().getColorId(), vehicle.getType().getTypeId(),
-                    vehicle.getStatus().getStatusId(), vehicle.getUserId());
+                    vehicle.getStatus().getStatusId(), vehicle.getUserId(), vehicle.getInterior().getColorId());
         }catch(DataAccessException ex){
             return null;
         }
@@ -78,6 +78,7 @@ public class VehicleDaoDb implements VehicleDao{
                     + "INNER JOIN color USING(colorID) "
                     + "INNER JOIN status USING(statusId) "
                     + "INNER JOIN make USING(makeId) "
+                    + "INNER JOIN interiorColor USING (interiorColorId) "
                     + "WHERE vin = ?;";
             
             // Execute the query
@@ -103,7 +104,8 @@ public class VehicleDaoDb implements VehicleDao{
                 + "INNER JOIN type USING(typeId) "
                 + "INNER JOIN color USING(colorID) "
                 + "INNER JOIN status USING(statusId) "
-                + "INNER JOIN make USING(makeId);";
+                + "INNER JOIN make USING(makeId) "
+                + "INNER JOIN interiorColor USING (interiorColorId);";
         
         // Return the entire list
         List<Vehicle> test =  jdbc.query(sql, new VehicleMapper());
@@ -144,7 +146,7 @@ public class VehicleDaoDb implements VehicleDao{
             final String sql = "UPDATE vehicle SET vin = ?, mileage = ?, "
                     + "salePrice = ?, msrp = ?, carYear = ?, carDescription = ?, "
                     + "pictureUrl = ?, modelId = ?, styleId = ?, transmissionId = ?, "
-                    + "colorId = ?, typeId = ?, statusId = ?, userId = ? "
+                    + "colorId = ?, typeId = ?, statusId = ?, userId = ?, interiorColorId = ? "
                     + "WHERE vin = ?";
             
             // Execute the statement
@@ -154,7 +156,7 @@ public class VehicleDaoDb implements VehicleDao{
                     vehicle.getModel().getModelId(), vehicle.getStyle().getStyleId(),
                     vehicle.getTransmission().getTransmissionId(),
                     vehicle.getColor().getColorId(), vehicle.getType().getTypeId(),
-                    vehicle.getStatus().getStatusId(), vehicle.getUserId(),
+                    vehicle.getStatus().getStatusId(), vehicle.getUserId(), vehicle.getInterior().getColorId(),
                     vehicle.getVin());
         }catch(DataAccessException ex){
             return false;
@@ -173,6 +175,7 @@ public class VehicleDaoDb implements VehicleDao{
                 + "INNER JOIN color USING(colorID) "
                 + "INNER JOIN status USING(statusId) "
                 + "INNER JOIN make USING(makeId) "
+                + "INNER JOIN interiorColor USING (interiorColorId) "
                 + "WHERE makeId = ?;";
         
         // Execute sql statement
@@ -221,6 +224,11 @@ public class VehicleDaoDb implements VehicleDao{
             color.setNameColor(rs.getString("nameColor"));
             color.setColorId(rs.getInt("colorId"));
             
+            // Create, populate Interior Color object
+            Color interior = new Color();
+            interior.setColorId(rs.getInt("interiorColorId"));
+            interior.setNameColor(rs.getString("nameInteriorColor"));
+            
             // Create, populate Type Object
             Type type = new Type();
             type.setNameType(rs.getString("nameType"));
@@ -246,6 +254,7 @@ public class VehicleDaoDb implements VehicleDao{
             vehicle.setType(type);
             vehicle.setStatus(status);
             vehicle.setMake(make);
+            vehicle.setInterior(interior);
             
             return vehicle;
         }
