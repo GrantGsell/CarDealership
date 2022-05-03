@@ -13,36 +13,48 @@
 
         <!-- custom contents area for title -->
         <div class="my-3">
+
+
             <h2>Contact</h2>
-            <!-- ref:https://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_input_type_text -->
-            <form action="/action_page.php">
-                <label for="contactName">Name: </label>
-                <input type="text" id="contactName" name="contactName"><br><br>
-                <label for="email">Email: </label>
-                <input type="text" id="email" name="email"><br><br>
-                <label for="phone">Phone: </label>
-                <input type="text" id="phone" name="phone"><br><br>
-                <label for="message">Message: </label>
-                <input type="text" id="message" name="message"><br><br>                
-                <input type="submit" value="Submit">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.119353643156!2d-74.03064828459425!3d40.73739917932914!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a13a1e6aaab%3A0x907a08b78c84bfb0!2smthree%2C%20Hoboken!5e0!3m2!1sen!2sus!4v1651556179746!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </form>
 
-        </div>
+            <div class="row justify-content-start">
+                <div class="col-4">
+                    <!-- ref:https://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_input_type_text -->
+                    <form action="/action_page.php">
+                        <div class="row">
 
-        <!-- 
-            Custom contents area for contact form 
-        -->
-        <div>
-            <p> TODO: need to implement search for contact form </p>
+                            <label for="contactName">Name: </label>
+                            <input type="text" id="contactName" name="contactName"><br><br>
+                            <label for="email">Email: </label>
+                            <input type="text" id="email" name="email"><br><br>
+                            <label for="phone">Phone: </label>
+                            <input type="text" id="phone" name="phone"><br><br>
+                            <label for="message">Message: </label>
+                            <input type="text" id="message" name="message"><br><br>                
+                            <input type="submit" value="Submit">
 
-        </div>
-    </div>            
+                        </div>
+                    </form>
+                </div>
+                <div class="col-6 m-4">                                                  
+                    <div class ="row">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.119353643156!2d-74.03064828459425!3d40.73739917932914!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a13a1e6aaab%3A0x907a08b78c84bfb0!2smthree%2C%20Hoboken!5e0!3m2!1sen!2sus!4v1651556179746!5m2!1sen!2sus" width="550" height="450" align="right" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <!-- </form> might need this, idk where it came from -->  
+                    </div>
+                    <div class="row">
+                        <p> 111 River St, Hoboken NJ 07030 </p>
+                        <p> Sales: 123-456-7890 </p>
+                        <p> Service: 987-654-3210 </p>
+                    </div>
+                </div>
+            </div>
 
-    <!-- footer -->
-    <div th:replace="fragments/footer.html :: footer"></div>
-</div>
+        </div>            
 
-<!-- custom javascript file location -->
+        <!-- footer -->
+        <div th:replace="fragments/footer.html :: footer"></div>
+    </div>
+
+    <!-- custom javascript file location -->
 </body>
 </html>
