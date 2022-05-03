@@ -11,6 +11,7 @@ import java.math.BigDecimal;
  * @author Jeonghoon
  */
 public class QuickSearch {
+    private String type;
     private String keyword;
     private BigDecimal minPrice;
     private BigDecimal maxPrice;
@@ -55,6 +56,14 @@ public class QuickSearch {
 
     public void setMaxYear(int maxYear) {
         this.maxYear = maxYear;
+    }
+    
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     @Override

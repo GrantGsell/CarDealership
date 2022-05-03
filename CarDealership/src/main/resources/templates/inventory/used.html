@@ -16,7 +16,7 @@
             <div class="my-3">
                 <h2>Used Vehicles</h2>
             </div>
-
+            
             <div th:replace="fragments/quicksearch.html :: quicksearch-div"></div>
 
             <!-- 
@@ -37,5 +37,10 @@
 
         <!-- custom javascript file location -->
         <script src="/js/vehicle.js"></script>
+        <script>
+            $(document).ready(() => {
+                $("#type").val("used");
+            });
+        </script>
     </body>
 </html>

@@ -79,8 +79,18 @@ public class InventoryController {
                     // No Minimum Price and No Maximum Price
                     return true;
                 })
+                .filter(vehicle -> {
+                    if(search.getType().equals("used"))
+                        return vehicle.getType().getTypeId() == 2;
+                    else if(search.getType().equals("new"))
+                        return vehicle.getType().getTypeId() == 1;
+                    else
+                        return true;
+                })
                 .collect(Collectors.toList());
     }
+    
+    
     
     @GetMapping("inventory/details/{vin}")
     public String inventoryDetailPage(@PathVariable String vin, Model model){

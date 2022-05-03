@@ -1,8 +1,8 @@
 $(document).ready(() => {
-    searchSalesVehicles();
+    searchNewVehicles();
 });
 
-const searchSalesVehicles = () => {
+const searchNewVehicles = () => {
     $('#search').click(event => {
         event.preventDefault();
         
@@ -15,6 +15,7 @@ const searchSalesVehicles = () => {
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({
+                type: $('#type').val(),
                 keyword: $('#keyword').val(),
                 minPrice: $('#minPrice').val(),
                 maxPrice: $('#maxPrice').val(),
@@ -29,8 +30,8 @@ const searchSalesVehicles = () => {
     });
 };
 
+
 const displaySearchResult = data => {
-    
     $('#resultList').empty();
     (data.length > 0) & $('#resultContainer').removeClass('d-none');
     
