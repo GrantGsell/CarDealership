@@ -21,7 +21,6 @@ public class InventoryController {
     
     @GetMapping("inventory/new")
     public String getNewInventoryPage(Model model) {
-        //List<Integer> numbers = new ArrayList<>();
         List<Vehicle> numbers = vehicleDao.getAllVehicles();
         
         model.addAttribute("numberList", numbers);
@@ -29,7 +28,11 @@ public class InventoryController {
     }
 
     @GetMapping("inventory/used")
-    public String getUsedInventoryPage() {
+    public String getUsedInventoryPage(Model model) {
+        List<Vehicle> numbers = vehicleDao.getAllVehicles();
+        
+        model.addAttribute("numberList", numbers);
+        
         return "inventory/used";
     }
 }
