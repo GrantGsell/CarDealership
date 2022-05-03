@@ -57,4 +57,8 @@ public class QuickSearch {
         this.maxYear = maxYear;
     }
 
+    @Override
+    public String toString() {
+        return "QuickSearch{" + "keyword=" + keyword + ", minPrice=" + minPrice + ", maxPrice=" + maxPrice + ", minYear=" + minYear + ", maxYear=" + maxYear + '}';
+    }
 }

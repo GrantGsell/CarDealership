@@ -14,9 +14,6 @@
             <!-- custom contents area for title -->
             <div class="my-3">
                 <h2>Sales</h2>
-                <!-- TODO: remove following 2 line after testing -->
-                <p>This button is for testing</p>
-                <a href="/sales/purchase/test" type="button" class="btn btn-outline-primary">Detail for purchase</a>
             </div>           
 
             <div th:replace="fragments/quicksearch.html :: quicksearch-div"></div>
@@ -26,9 +23,11 @@
                 - No search results should be shown by default
                 = The search should utilize an AJAX call via jQuery.
             -->
-            <div class="mt-5">
+            <div class="my-5 d-none" id="resultContainer">
                 <h2>Search Results</h2>
-                <p> TODO: need to implement search for Sales </p>
+                <div id="resultList">
+                    
+                </div>
             </div>
 
             <!-- footer -->

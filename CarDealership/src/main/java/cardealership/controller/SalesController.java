@@ -5,7 +5,10 @@
 package cardealership.controller;
 
 import cardealership.dao.SalesDao;
+import cardealership.dao.VehicleDao;
 import cardealership.dto.QuickSearch;
+import cardealership.dto.Vehicle;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +26,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class SalesController {
 
     @Autowired
+    VehicleDao vehicleDao;
+
+    @Autowired
     SalesDao salesDao;
 
     @GetMapping("sales/index")
@@ -32,9 +38,10 @@ public class SalesController {
 
     @PostMapping("sales/search")
     @ResponseBody
-    public String createProduct(@RequestBody QuickSearch search) {
+    public List<Vehicle> createProduct(@RequestBody QuickSearch search) {
+        List<Vehicle> vehicles = vehicleDao.getAllVehicles();
         // custom logic
-        return "This is a test";
+        return vehicles;
     }
 
     @GetMapping("sales/purchase/{vin}")
