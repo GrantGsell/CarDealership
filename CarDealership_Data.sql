@@ -39,6 +39,9 @@ insert into transmission (transmissionName)
   
  insert into color (nameColor)
 	values ('White'), ('Black'), ('Silver'), ('Gold'), ('Red');
+    
+insert into interiorColor (nameInteriorColor)
+	values ('Black'), ('Orange'), ('Blue'), ('Green'), ('Red');
 
  insert into status (nameStatus)
 	values ('Sold'), ('Available');
@@ -130,4 +133,5 @@ INNER JOIN transmission USING(transmissionId)
 INNER JOIN type USING(typeId) 
 INNER JOIN color USING(colorID) 
 INNER JOIN status USING(statusId)
-INNER JOIN make USING(makeId);
+INNER JOIN make USING(makeId)
+INNER JOIN interiorColor USING (interiorColorId);

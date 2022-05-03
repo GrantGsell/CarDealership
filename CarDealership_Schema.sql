@@ -126,6 +126,19 @@ CREATE TABLE make(
 	colorId smallInt auto_increment PRIMARY KEY,
     nameColor varchar(20) not null
  );
+ 
+/*
+ * Table Name: interiorColor
+ *
+ * Notes:
+ * 		Along with standard colors we have included car enthusiast colors from
+ *		https://www.thecoatingstore.com/car-paint-colors/. Colorid and colorName
+ *		are set accordingly
+ */
+ CREATE TABLE interiorColor(
+	interiorColorId smallInt auto_increment PRIMARY KEY,
+    nameInteriorColor varchar(20) not null
+ );
 
 /*
  * Table Name: status
@@ -164,12 +177,13 @@ CREATE TABLE make(
     typeId tinyint not null,
     statusId smallint not null,
     userId int not null,
-    interiorColorId int not null,
+    interiorColorId smallint not null,
     
     CONSTRAINT fk_vehicle_model FOREIGN KEY (modelId) REFERENCES make(makeId),
 	CONSTRAINT fk_vehicle_bodyStyle FOREIGN KEY (styleId) REFERENCES bodyStyle(styleId),
 	CONSTRAINT fk_vehicle_transmission FOREIGN KEY (transmissionId) REFERENCES transmission(transmissionId),
     CONSTRAINT fk_vehicle_color FOREIGN KEY (colorId) REFERENCES color(colorId),
+    CONSTRAINT fk_vehicle_interior FOREIGN KEY (interiorColorId) REFERENCES interiorColor(interiorColorId),
 	CONSTRAINT fk_vehicle_type FOREIGN KEY (typeId) REFERENCES type(typeId),
 	CONSTRAINT fk_vehicle_status FOREIGN KEY (statusId) REFERENCES status(statusId),
     CONSTRAINT fk_vehicle_user FOREIGN KEY (userId) REFERENCES user(userId)    

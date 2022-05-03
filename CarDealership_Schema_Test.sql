@@ -127,6 +127,21 @@ CREATE TABLE make(
     nameColor varchar(20) not null
  );
 
+
+/*
+ * Table Name: interiorColor
+ *
+ * Notes:
+ * 		Along with standard colors we have included car enthusiast colors from
+ *		https://www.thecoatingstore.com/car-paint-colors/. Colorid and colorName
+ *		are set accordingly
+ */
+ CREATE TABLE interiorColor(
+	interiorColorId smallInt auto_increment PRIMARY KEY,
+    nameInteriorColor varchar(20) not null
+ );
+
+
 /*
  * Table Name: status
  *
@@ -149,7 +164,7 @@ CREATE TABLE make(
  *		Price is set to int which contains the most expensive car currently whihc is the
  *			Bugatti La Voiture Noire at 18.7 million dollars. MSRP is set accordingly.
  */
- CREATE TABLE vehicle(
+  CREATE TABLE vehicle(
 	vin varchar(17) PRIMARY KEY,
     mileage mediumInt not null,
     salePrice decimal(10,2) not null,
@@ -164,12 +179,13 @@ CREATE TABLE make(
     typeId tinyint not null,
     statusId smallint not null,
     userId int not null,
-    interiorColorId int not null,
+    interiorColorId smallint not null,
     
     CONSTRAINT fk_vehicle_model FOREIGN KEY (modelId) REFERENCES make(makeId),
 	CONSTRAINT fk_vehicle_bodyStyle FOREIGN KEY (styleId) REFERENCES bodyStyle(styleId),
 	CONSTRAINT fk_vehicle_transmission FOREIGN KEY (transmissionId) REFERENCES transmission(transmissionId),
     CONSTRAINT fk_vehicle_color FOREIGN KEY (colorId) REFERENCES color(colorId),
+    CONSTRAINT fk_vehicle_interior FOREIGN KEY (interiorColorId) REFERENCES interiorColor(interiorColorId),
 	CONSTRAINT fk_vehicle_type FOREIGN KEY (typeId) REFERENCES type(typeId),
 	CONSTRAINT fk_vehicle_status FOREIGN KEY (statusId) REFERENCES status(statusId),
     CONSTRAINT fk_vehicle_user FOREIGN KEY (userId) REFERENCES user(userId)    
@@ -313,14 +329,17 @@ insert into transmission (transmissionName)
   
  insert into color (nameColor)
 	values ('White'), ('Black'), ('Silver'), ('Gold'), ('Red');
+    
+ insert into interiorColor (nameInteriorColor)
+	values ('Black'), ('Orange'), ('Blue'), ('Green'), ('Red');
  
  insert into status (nameStatus)
 	values ('Sold'), ('Available');
 
  insert into vehicle (vin, mileage, salePrice, msrp, carYear, carDescription, modelId, styleId, transmissionId, colorId, typeId, statusId, userId, interiorColorId)
-	values ('1234567890ABCDEFG', 100000, 10000.00, 11000.00, 2016, 'Good condition', 1, 1, 1, 1, 1, 1, 1),
-    ('2234567890ABCDEFG', 50000, 18900.00, 20000.00, 2018, 'Good performance', 1, 2, 1, 4, 1, 2, 1),
-    ('3234567890ABCDEFG', 10000, 25555.00, 27000.00, 2021, 'Almost new', 1, 2, 1, 3, 2, 2, 1);
+	values ('1234567890ABCDEFG', 100000, 10000.00, 11000.00, 2016, 'Good condition', 1, 1, 1, 1, 1, 1, 1, 5),
+    ('2234567890ABCDEFG', 50000, 18900.00, 20000.00, 2018, 'Good performance', 1, 2, 1, 4, 1, 2, 1, 5),
+    ('3234567890ABCDEFG', 10000, 25555.00, 27000.00, 2021, 'Almost new', 1, 2, 1, 3, 2, 2, 1, 5);
 
 insert into purchaseType (purchaseName)
 	values ('Bank Finance'), ('Cash'), ('Dealer Finance');
