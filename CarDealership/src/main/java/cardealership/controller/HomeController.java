@@ -5,6 +5,8 @@
 package cardealership.controller;
 
 import cardealership.dao.SpecialDao;
+import cardealership.dto.Special;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,8 +25,15 @@ public class HomeController {
     SpecialDao specialDao;
 
     // Handling Get Request for multiple value
-    @RequestMapping(value = {"home", "home/index"}, method = RequestMethod.GET)
-    public String getHomePage() {
+    @RequestMapping(value = {"/", "home", "home/index"}, method = RequestMethod.GET)
+    public String getHomePage(Model model) {
+        List<Special> specials = specialDao.getAllSpecial();
+
+        if (specials.size() > 5) {
+            model.addAttribute("specials", specials.subList(0, 5));
+        } else {
+            model.addAttribute("specials", specials);
+        }
         return "home/index";
     }
 
