@@ -40,8 +40,8 @@ public class VehicleDaoDb implements VehicleDao{
             // Create a sql statement
             final String sql = "INSERT INTO vehicle(vin, mileage, salePrice, msrp, "
                     + "carYear, carDescription, pictureUrl, modelId, styleId, "
-                    + "transmissionId, colorId, typeId, statusId, userId, interiorColorId) "
-                    + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    + "transmissionId, colorId, typeId, statusId, userId, interiorColorId, isFeatured) "
+                    + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             
             // Execute the statement
             jdbc.update(sql, vehicle.getVin(), vehicle.getMileage(),
@@ -50,7 +50,8 @@ public class VehicleDaoDb implements VehicleDao{
                     vehicle.getModel().getModelId(), vehicle.getStyle().getStyleId(),
                     vehicle.getTransmission().getTransmissionId(),
                     vehicle.getColor().getColorId(), vehicle.getType().getTypeId(),
-                    vehicle.getStatus().getStatusId(), vehicle.getUserId(), vehicle.getInterior().getColorId());
+                    vehicle.getStatus().getStatusId(), vehicle.getUserId(), 
+                    vehicle.getInterior().getColorId(), vehicle.getIsFeatured());
         }catch(DataAccessException ex){
             return null;
         }
@@ -146,7 +147,8 @@ public class VehicleDaoDb implements VehicleDao{
             final String sql = "UPDATE vehicle SET vin = ?, mileage = ?, "
                     + "salePrice = ?, msrp = ?, carYear = ?, carDescription = ?, "
                     + "pictureUrl = ?, modelId = ?, styleId = ?, transmissionId = ?, "
-                    + "colorId = ?, typeId = ?, statusId = ?, userId = ?, interiorColorId = ? "
+                    + "colorId = ?, typeId = ?, statusId = ?, userId = ?, "
+                    + "interiorColorId = ?, isFeatured = ? "
                     + "WHERE vin = ?";
             
             // Execute the statement
@@ -156,7 +158,8 @@ public class VehicleDaoDb implements VehicleDao{
                     vehicle.getModel().getModelId(), vehicle.getStyle().getStyleId(),
                     vehicle.getTransmission().getTransmissionId(),
                     vehicle.getColor().getColorId(), vehicle.getType().getTypeId(),
-                    vehicle.getStatus().getStatusId(), vehicle.getUserId(), vehicle.getInterior().getColorId(),
+                    vehicle.getStatus().getStatusId(), vehicle.getUserId(), 
+                    vehicle.getInterior().getColorId(), vehicle.getIsFeatured(),
                     vehicle.getVin());
         }catch(DataAccessException ex){
             return false;
@@ -202,6 +205,7 @@ public class VehicleDaoDb implements VehicleDao{
             vehicle.setCarDescription(rs.getString("carDescription"));
             vehicle.setPictureUrl(rs.getString("pictureUrl"));
             vehicle.setUserId(rs.getInt("userId"));
+            vehicle.setIsFeatured(rs.getBoolean("isFeatured"));
             
             // Create, populate Model Object
             Model model = new Model();

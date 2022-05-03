@@ -180,6 +180,7 @@ CREATE TABLE make(
     statusId smallint not null,
     userId int not null,
     interiorColorId smallint not null,
+    isFeatured boolean not null,
     
     CONSTRAINT fk_vehicle_model FOREIGN KEY (modelId) REFERENCES make(makeId),
 	CONSTRAINT fk_vehicle_bodyStyle FOREIGN KEY (styleId) REFERENCES bodyStyle(styleId),
@@ -336,10 +337,10 @@ insert into transmission (transmissionName)
  insert into status (nameStatus)
 	values ('Sold'), ('Available');
 
- insert into vehicle (vin, mileage, salePrice, msrp, carYear, carDescription, modelId, styleId, transmissionId, colorId, typeId, statusId, userId, interiorColorId)
-	values ('1234567890ABCDEFG', 100000, 10000.00, 11000.00, 2016, 'Good condition', 1, 1, 1, 1, 1, 1, 1, 5),
-    ('2234567890ABCDEFG', 50000, 18900.00, 20000.00, 2018, 'Good performance', 1, 2, 1, 4, 1, 2, 1, 5),
-    ('3234567890ABCDEFG', 10000, 25555.00, 27000.00, 2021, 'Almost new', 1, 2, 1, 3, 2, 2, 1, 5);
+ insert into vehicle (vin, mileage, salePrice, msrp, carYear, carDescription, modelId, styleId, transmissionId, colorId, typeId, statusId, userId, interiorColorId, isFeatured)
+	values ('1234567890ABCDEFG', 100000, 10000.00, 11000.00, 2016, 'Good condition', 1, 1, 1, 1, 1, 1, 1, 5, false),
+    ('2234567890ABCDEFG', 50000, 18900.00, 20000.00, 2018, 'Good performance', 1, 2, 1, 4, 1, 2, 1, 5, false),
+    ('3234567890ABCDEFG', 10000, 25555.00, 27000.00, 2021, 'Almost new', 1, 2, 1, 3, 2, 2, 1, 5, true);
 
 insert into purchaseType (purchaseName)
 	values ('Bank Finance'), ('Cash'), ('Dealer Finance');

@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <!-- include common script files from head.html -->
         <th:block th:include="fragments/head.html :: headerfiles"></th:block>
@@ -25,6 +26,7 @@
                             <!-- TODO: implement with database -->
                             <select id="inputMake" class="form-control">
                                 <option selected>Audi</option>
+                                <option>BMW</option>
                             </select>
                         </div>
                         <div class="form-group col-md-4">
@@ -33,6 +35,7 @@
                             <select id="inputModel" class="form-control">
                                 <option selected>A4</option>
                                 <option>A5</option>
+                                <option>A6</option>
                             </select>
                         </div>
                     </div>

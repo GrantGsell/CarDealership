@@ -178,6 +178,7 @@ CREATE TABLE make(
     statusId smallint not null,
     userId int not null,
     interiorColorId smallint not null,
+    isFeatured boolean not null,
     
     CONSTRAINT fk_vehicle_model FOREIGN KEY (modelId) REFERENCES make(makeId),
 	CONSTRAINT fk_vehicle_bodyStyle FOREIGN KEY (styleId) REFERENCES bodyStyle(styleId),
