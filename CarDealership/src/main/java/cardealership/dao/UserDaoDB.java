@@ -56,7 +56,7 @@ public class UserDaoDB implements UserDao {
     @Override
     public User getUserById(int id) {
         try {
-            final String SELECT_USER_BY_ID = "SELECT * FROM user WHERE id = ?";
+            final String SELECT_USER_BY_ID = "SELECT * FROM user WHERE userId = ?";
             return jdbc.queryForObject(SELECT_USER_BY_ID, new UserMapper(), id);
         } catch (DataAccessException ex) {
             return null;
@@ -86,7 +86,7 @@ public class UserDaoDB implements UserDao {
     @Override
     public void deleteUserById(int id) {
 
-        final String DELETE_USER = "DELETE FROM user WHERE id = ?";
+        final String DELETE_USER = "DELETE FROM user WHERE userId = ?";
         jdbc.update(DELETE_USER, id);
     }
 

@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <!-- include common script files from head.html -->
+        <th:block th:include="fragments/head.html :: headerfiles"></th:block>
+        <title>Guild Car: home</title>
+        <th:block th:include="fragments/quicksearch.html :: datepicker-headerfiles"></th:block>
+    </head>
+    <body>
+        <div class="container d-flex flex-column min-vh-100">
+            <!-- header and nav menu  -->
+            <div th:replace="fragments/header.html :: header"> </div>
+
+            <!-- custom contents area for title -->
+            <div class="my-3">
+                <h2>Inventory Report</h2>
+            </div>
+
+            <!-- 
+                Display user list 
+            -->
+
+            <!-- footer -->
+            <div th:replace="fragments/footer.html :: footer"></div>
+        </div>
+
+        <!-- custom javascript file location -->
+    </body>
+</html>

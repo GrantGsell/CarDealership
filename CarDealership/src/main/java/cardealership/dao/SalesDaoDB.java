@@ -71,7 +71,7 @@ public class SalesDaoDB implements SalesDao {
 
     @Override
     public Sales createSales(Sales sales) {
-        final String INSERT_SALES = "INSERT INTO sales(nameSales, phone, email, "
+        final String INSERT_SALES = "INSERT INTO salesInfo(nameSales, phone, email, "
                 + "street1, street2, city, stateId, zipcode, "
                 + "purchasePrice, vin, purchaseTypeId, userId) "
                 + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -97,7 +97,7 @@ public class SalesDaoDB implements SalesDao {
 
     @Override
     public List<Sales> getAllSales() {
-        final String GET_ALL_SALES = "SELECT * FROM sales";
+        final String GET_ALL_SALES = "SELECT * FROM salesInfo";
         List<Sales> salesList = jdbc.query(GET_ALL_SALES, new SalesMapper());
 
         associateOtherFieldsForSalesList(salesList);
@@ -120,7 +120,7 @@ public class SalesDaoDB implements SalesDao {
 
     @Override
     public void deleteSalesById(int id) {
-        final String DELETE_SALES = "DELETE FROM salesInfo WHERE id = ?";
+        final String DELETE_SALES = "DELETE FROM salesInfo WHERE salesId = ?";
         jdbc.update(DELETE_SALES, id);
     }
 
@@ -138,7 +138,7 @@ public class SalesDaoDB implements SalesDao {
                 + "purchasePrice = ?, "
                 + "purchaseTypeId = ?, "
                 + "userId = ? "
-                + "WHERE id = ?";
+                + "WHERE salesId = ?";
         jdbc.update(UPDATE_SALES,
                 sales.getName(),
                 sales.getPhone(),
@@ -157,7 +157,7 @@ public class SalesDaoDB implements SalesDao {
 
     @Override
     public List<Sales> getAllSalesByUser(int userId) {
-        final String GET_ALL_SALES = "SELECT * FROM sales WHERE userId = ?";
+        final String GET_ALL_SALES = "SELECT * FROM salesInfo WHERE userId = ?";
         List<Sales> salesList = jdbc.query(GET_ALL_SALES, new SalesMapper(), userId);
 
         associateOtherFieldsForSalesList(salesList);
@@ -179,12 +179,34 @@ public class SalesDaoDB implements SalesDao {
     }
 
     @Override
+    public PurchaseType getPurchaseTypeById(int id) {
+        try {
+            final String SELECT_PURCHASE_BY_ID = "SELECT * FROM purchaseType WHERE purchaseTypeId = ?";
+
+            return jdbc.queryForObject(SELECT_PURCHASE_BY_ID, new PurchaseTypeMapper(), id);
+        } catch (DataAccessException ex) {
+            return null;
+        }
+    }
+
+    @Override
     public List<PurchaseType> getAllPurchaseType() {
         final String GET_ALL_PURCHASE_TYPE = "SELECT * FROM purchaseType";
         List<PurchaseType> purchaseTypeList
                 = jdbc.query(GET_ALL_PURCHASE_TYPE, new PurchaseTypeMapper());
 
         return purchaseTypeList;
+    }
+
+    @Override
+    public State getStateById(int id) {
+        try {
+            final String SELECT_STATE_BY_ID = "SELECT * FROM UsState WHERE stateId = ?";
+
+            return jdbc.queryForObject(SELECT_STATE_BY_ID, new StateMapper(), id);
+        } catch (DataAccessException ex) {
+            return null;
+        }
     }
 
     @Override

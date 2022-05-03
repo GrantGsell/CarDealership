@@ -5,13 +5,18 @@
 package cardealership.controller;
 
 import cardealership.dao.SalesDao;
+import cardealership.dao.UserDao;
 import cardealership.dao.VehicleDao;
 import cardealership.dto.QuickSearch;
+import cardealership.dto.Sales;
+import cardealership.dto.Status;
 import cardealership.dto.Vehicle;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,6 +37,9 @@ public class SalesController {
     @Autowired
     SalesDao salesDao;
 
+    @Autowired
+    UserDao userDao;
+
     @GetMapping("sales/index")
     public String getSalesIndexPage() {
         return "sales/index";
@@ -42,6 +50,7 @@ public class SalesController {
     public List<Vehicle> createProduct(@RequestBody QuickSearch search) {
 
         return vehicleDao.getAllVehicles().stream()
+                .filter(vehicle -> vehicle.getStatus().getStatusId() == 2) // check if vehicle is available
                 .filter(vehicle -> {
                     if (!search.getKeyword().isBlank()) {
                         return vehicle.getMake().getNameMake().contains(search.getKeyword())
@@ -86,10 +95,40 @@ public class SalesController {
     }
 
     @GetMapping("sales/purchase/{vin}")
-    public String purchaseDetailPage(@PathVariable String vin, Model model) {
+    public String getPurchaseDetailPage(@PathVariable String vin, Model model) {
         model.addAttribute("purchaseTypes", salesDao.getAllPurchaseType());
         model.addAttribute("states", salesDao.getAllState());
+        model.addAttribute("vehicle", vehicleDao.getVehicleByVIN(vin));
 
         return "sales/purchase";
+    }
+
+    @PostMapping("sales/purchase/{vin}")
+    @Transactional
+    public String purchaseVehicle(@PathVariable String vin, Sales sales, HttpServletRequest request) {
+
+        int stateId = Integer.parseInt(request.getParameter("stateId"));
+        int purchaseTypeId = Integer.parseInt(request.getParameter("purchaseTypeId"));
+
+        // TODO: currently logged in userId
+        int userId = 2;
+
+        sales.setState(salesDao.getStateById(stateId));
+        sales.setPurchaseType(salesDao.getPurchaseTypeById(purchaseTypeId));
+        sales.setUser(userDao.getUserById(userId));
+
+        // Vehicle status update as sold.
+        Vehicle vehicle = vehicleDao.getVehicleByVIN(vin);
+        Status status = vehicle.getStatus();
+
+        status.setStatusId(1);  // sold
+        vehicle.setStatus(status);
+        sales.setVehicle(vehicle);
+
+        // update database
+        vehicleDao.updateVehicle(vehicle);
+        salesDao.createSales(sales);
+
+        return "redirect:/sales/index";
     }
 }

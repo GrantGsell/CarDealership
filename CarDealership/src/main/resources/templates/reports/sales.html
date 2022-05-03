@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <!-- include common script files from head.html -->
+        <th:block th:include="fragments/head.html :: headerfiles"></th:block>
+        <title>Guild Car: home</title>
+        <!--<th:block th:include="fragments/quicksearch.html :: datepicker-headerfiles"></th:block>-->
+    </head>
+    <body>
+        <div class="container d-flex flex-column min-vh-100">
+            <!-- header and nav menu  -->
+            <div th:replace="fragments/header.html :: header"> </div>
+
+            <!-- custom contents area for title -->
+            <div class="my-3">
+                <h2>Sales Report</h2>
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Filter</h4>
+                        <form>
+                            <div class="row g-2 mt-2">
+                                <div class="form-group row col-4 mr-1">
+                                    <div class="col-3" style="text-align: center">
+                                        <label class="col-form-label" for="selectUser">User</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <!-- get list from database -->
+                                        <select id="selectUser" name="userId" class="form-control">
+                                            <option value="0">-All-</option>
+                                            <!--<option th:each="user : ${users}" th:value="${user.userId}" th:text="${user.lastName}"></option>-->
+                                        </select>
+                                    </div>
+                                </div>                   
+                                <div class="form-group row col-8 mr-1">
+                                    <div class="col-2" style="text-align: right">
+                                        <label class="col-form-label">Date</label>
+                                    </div>
+                                    <div class="col-auto">
+                                        <input type="text" class="datepicker form-control text-center" name="fromDate" id="selectFromDate" placeholder="From"/>
+                                    </div>
+                                    <div class="col-auto">
+                                        <input type="text" class="datepicker form-control text-center" name="toDate" id="selectToDate" placeholder="To"/>
+                                    </div>
+                                </div>                    
+                            </div>
+                            <div class="col-12 mt-3">
+                                <button id="search" class="btn btn-primary col-3">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 
+                Display user list 
+            -->
+
+            <!-- footer -->
+            <div th:replace="fragments/footer.html :: footer"></div>
+        </div>
+
+        <!-- custom javascript file location -->
+    </body>
+</html>

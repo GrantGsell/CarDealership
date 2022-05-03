@@ -25,12 +25,15 @@ public interface SalesDao {
 
     void updateSales(Sales sales);
 
-    // TODO: we may need following methods
     List<Sales> getAllSalesByUser(int userId);
 
     Sales getSalesByVin(String vin);
 
+    PurchaseType getPurchaseTypeById(int id);
+
     List<PurchaseType> getAllPurchaseType();
+
+    State getStateById(int id);
 
     List<State> getAllState();
 }

@@ -46,7 +46,7 @@ public class AdminController {
 
     // users
     @GetMapping("admin/users")
-    public String getAdminUsersPage() {
+    public String getUsersPage() {
         return "admin/users";
     }
 
@@ -61,6 +61,21 @@ public class AdminController {
         // TODO: Store database for adding vehicle
 
         return "admin/users";
+    }
+
+    @GetMapping("admin/make")
+    public String getMakePage() {
+        return "admin/make";
+    }
+
+    @GetMapping("admin/model")
+    public String getModelPage() {
+        return "admin/model";
+    }
+
+    @GetMapping("admin/specials")
+    public String getAdminSpecialsPage() {
+        return "admin/specials";
     }
 
 }
