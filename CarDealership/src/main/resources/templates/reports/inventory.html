@@ -2,28 +2,63 @@
 <html>
     <head>
         <!-- include common script files from head.html -->
-        <th:block th:include="fragments/head.html :: headerfiles"></th:block>
-        <title>Guild Car: home</title>
-        <th:block th:include="fragments/quicksearch.html :: datepicker-headerfiles"></th:block>
-    </head>
-    <body>
-        <div class="container d-flex flex-column min-vh-100">
-            <!-- header and nav menu  -->
-            <div th:replace="fragments/header.html :: header"> </div>
+    <th:block th:include="fragments/head.html :: headerfiles"></th:block>
+    <title>Guild Car: home</title>
+    <th:block th:include="fragments/quicksearch.html :: datepicker-headerfiles"></th:block>
+</head>
+<body>
+    <div class="container d-flex flex-column min-vh-100">
+        <!-- header and nav menu  -->
+        <div th:replace="fragments/header.html :: header"> </div>
 
-            <!-- custom contents area for title -->
-            <div class="my-3">
-                <h2>Inventory Report</h2>
-            </div>
-
-            <!-- 
-                Display user list 
-            -->
-
-            <!-- footer -->
-            <div th:replace="fragments/footer.html :: footer"></div>
+        <!-- custom contents area for title -->
+        <div class="my-3">
+            <h2>Inventory Report</h2>
         </div>
+        <div>
+            <p> New Vehicles </p>
+        </div>
+        <!-- https://www.w3schools.com/js/js_ajax_applications.asp -->
+        <!-- 
+                <table id="demo"></table>
 
-        <!-- custom javascript file location -->
-    </body>
+                <script>
+                function loadXMLDoc() {
+                  const xhttp = new XMLHttpRequest();
+                  xhttp.onload = function() {
+                    const xmlDoc = xhttp.responseXML;
+                    const cd = xmlDoc.getElementsByTagName("CD");
+                    myFunction(cd);
+                  }
+                  xhttp.open("GET", "cd_catalog.xml");
+                  xhttp.send();
+                }
+
+                function myFunction(cd) {
+                  let table="<tr><th>Artist</th><th>Title</th></tr>";
+                  for (let i = 0; i < cd.length; i++) {
+                    table += "<tr><td>" +
+                    cd[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue +
+                    "</td><td>" +
+                    cd[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue +
+                    "</td></tr>";
+                  }
+                  document.getElementById("demo").innerHTML = table;
+                }
+                </script>
+        -->
+
+        <div>
+            <p> Used Vehicles </p>
+        </div>
+        <!-- 
+            Display user list 
+        -->
+
+        <!-- footer -->
+        <div th:replace="fragments/footer.html :: footer"></div>
+    </div>
+
+    <!-- custom javascript file location -->
+</body>
 </html>

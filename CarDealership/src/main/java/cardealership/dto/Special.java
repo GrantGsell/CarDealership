@@ -11,6 +11,10 @@ import java.util.Objects;
  * @author nicolemagpantay
  */
 public class Special {
+
+    public static void settitle(String title) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
     private int specialId;
     private String title;
