@@ -180,7 +180,7 @@ CREATE TABLE make(
     interiorColorId smallint not null,
     isFeatured boolean not null,
     
-    CONSTRAINT fk_vehicle_model FOREIGN KEY (modelId) REFERENCES make(makeId),
+    -- CONSTRAINT fk_vehicle_model FOREIGN KEY (modelId) REFERENCES make(makeId),
 	CONSTRAINT fk_vehicle_bodyStyle FOREIGN KEY (styleId) REFERENCES bodyStyle(styleId),
 	CONSTRAINT fk_vehicle_transmission FOREIGN KEY (transmissionId) REFERENCES transmission(transmissionId),
     CONSTRAINT fk_vehicle_color FOREIGN KEY (colorId) REFERENCES color(colorId),
@@ -286,4 +286,4 @@ CREATE TABLE make(
     message mediumText not null
  );
  
- 
+ SELECT * FROM vehicle;

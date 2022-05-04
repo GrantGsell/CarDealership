@@ -106,6 +106,8 @@ public class AdminController {
         request.toVehicle(vehicle, typeDao, bodyStyleDao, transmissionDao, 
                 colorDao, interiorDao, modelDao, makeDao);
         
+        // Write the vehicle data to the database
+        vehicleDao.create(vehicle);
         
         return "admin/vehicles";
     }

@@ -41,7 +41,7 @@ public class VehicleDaoDb implements VehicleDao{
             final String sql = "INSERT INTO vehicle(vin, mileage, salePrice, msrp, "
                     + "carYear, carDescription, pictureUrl, modelId, styleId, "
                     + "transmissionId, colorId, typeId, statusId, userId, interiorColorId, isFeatured) "
-                    + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
             
             // Execute the statement
             jdbc.update(sql, vehicle.getVin(), vehicle.getMileage(),

@@ -23,9 +23,20 @@ insert into make (nameMake, dateAdded, userId)
     ('BMW', '2022-01-31', 1),
     ('Kia', '2022-02-21', 1)
 ;
- 
+
 insert into model (nameModel, makeId)
-	values ('Focus', 1)
+	values ('Focus', 1),
+    ('F-150', 1),
+    ('F-250', 1),
+    ('Civic', 2),
+    ('Pilot', 2),
+    ('Accord', 2),
+    ('530ia', 3),
+    ('330xi', 3),
+    ('M3', 3),
+    ('Sorento', 4),
+    ('Rio', 4),
+    ('Sportage', 4)
 ;
 
 insert into type (nameType)
@@ -50,7 +61,8 @@ insert into interiorColor (nameInteriorColor)
 	values ('1234567890ABCDEFG', 100000, 10000.00, 11000.00, 2016, 'Good condition', 1, 1, 1, 1, 1, 1, 1, 5, false),
     ('2234567890ABCDEFG', 50000, 18900.00, 20000.00, 2018, 'Good performance', 1, 2, 1, 4, 1, 2, 1, 5, false),
     ('3234567890ABCDEFG', 10000, 25555.00, 27000.00, 2021, 'Almost new', 1, 2, 1, 3, 2, 2, 1, 5, false),
-    ('ABCDEFG3234567890', 10000, 25555.00, 27000.00, 2021, 'Almost new', 1, 2, 1, 3, 1, 2, 1, 5, true);
+    ('ABCDEFG3234567890', 10000, 25555.00, 27000.00, 2021, 'Almost new', 1, 2, 1, 3, 1, 2, 1, 5, true),
+    ('ABCDEFG3234567899', 10000, 25555.00, 27000.00, 2021, 'Almost new', 5, 2, 1, 3, 1, 2, 1, 5, true);
 
 insert into purchaseType (purchaseName)
 	values ('Bank Finance'), ('Cash'), ('Dealer Finance');
