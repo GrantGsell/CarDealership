@@ -22,7 +22,7 @@ public class InteriorDaoDb implements InteriorDao{
     
     
     /**
-     * Obtains the Transmission id associated with the given name from the DB.
+     * Obtains the Interior id associated with the given name from the DB.
      * 
      * @param name the name of the Interior ID.
      * @return an int denoting the Id number associated with the given name.
