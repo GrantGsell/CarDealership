@@ -66,10 +66,10 @@ public class BodyStyleDaoDb implements BodyStyleDao{
     @Override
     public int getBodyStyleId(String name) {
         // Create sql statement 
-        final String sql = "SELECT * FROM bodystyle WHERE nameBodyStyle = ?;";
+        final String sql = "SELECT * FROM bodystyle WHERE nameStyle = ?;";
         
         // Execute statement and obtain singualr BodyStyle object
-        BodyStyle bodyStyle = jdbc.queryForObject(sql, new BodyStyleMapper());
+        BodyStyle bodyStyle = jdbc.queryForObject(sql, new BodyStyleMapper(), name);
         
         // Return the id of the BodyStyle object
         return bodyStyle.getStyleId();

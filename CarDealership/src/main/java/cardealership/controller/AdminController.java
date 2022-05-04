@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package cardealership.controller;
 
 import cardealership.dao.BodyStyleDao;
@@ -13,6 +9,8 @@ import cardealership.dao.TransmissionDao;
 import cardealership.dao.TypeDao;
 import cardealership.dao.UserDao;
 import cardealership.dao.VehicleDao;
+import cardealership.dto.QuickAdd;
+import cardealership.dto.Vehicle;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +18,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
@@ -97,8 +97,16 @@ public class AdminController {
     }
 
     @PostMapping("admin/addvehicle")
-    public String addVehicle(HttpServletRequest request, Model model) {
-        // TODO: Store database for adding vehicle
+    @ResponseBody
+    public String addVehicle(@RequestBody QuickAdd request) {
+        // Create a Vehicle Object
+        Vehicle vehicle = new Vehicle();
+        
+        // Populate the fields using QuickAdd toVehicle method
+        request.toVehicle(vehicle, typeDao, bodyStyleDao, transmissionDao, 
+                colorDao, interiorDao, modelDao, makeDao);
+        
+        
         return "admin/vehicles";
     }
 

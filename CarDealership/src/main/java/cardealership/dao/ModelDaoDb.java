@@ -24,7 +24,7 @@ public class ModelDaoDb implements ModelDao{
     
     
     /**
-     * Obtains the Transmission id associated with the given name from the DB.
+     * Obtains the Model id associated with the given name from the DB.
      * 
      * @param name the name of the Model ID.
      * @return an int denoting the Id number associated with the given name.
@@ -35,7 +35,7 @@ public class ModelDaoDb implements ModelDao{
         final String sql = "SELECT * FROM model WHERE nameModel = ?;";
         
         // Execute statement and obtain singualr Model object
-        Model model = jdbc.queryForObject(sql, new ModelMapper());
+        Model model = jdbc.queryForObject(sql, new ModelMapper(), name);
         
         // Return the id of the Model object
         return model.getModelId();

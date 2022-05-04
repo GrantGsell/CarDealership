@@ -33,7 +33,7 @@ public class ColorDaoDb implements ColorDao{
         final String sql = "SELECT * FROM color WHERE nameColor = ?;";
         
         // Execute statement and obtain singualr Color object
-        Color color = jdbc.queryForObject(sql, new ColorMapper());
+        Color color = jdbc.queryForObject(sql, new ColorMapper(), name);
         
         // Return the id of the Color object
         return color.getColorId();

@@ -33,7 +33,7 @@ public class TransmissionDaoDb implements TransmissionDao {
         final String sql = "SELECT * FROM transmission WHERE transmissionName = ?;";
         
         // Execute statement and obtain singualr Transmission object
-        Transmission transmission = jdbc.queryForObject(sql, new TransmissionMapper());
+        Transmission transmission = jdbc.queryForObject(sql, new TransmissionMapper(), name);
         
         // Return the id of the Transmission object
         return transmission.getTransmissionId();

@@ -32,7 +32,7 @@ public class MakeDaoDb implements MakeDao {
         final String sql = "SELECT * FROM make WHERE nameMake = ?;";
         
         // Execute statement and obtain singualr Make object
-        Make make = jdbc.queryForObject(sql, new MakeMapper());
+        Make make = jdbc.queryForObject(sql, new MakeMapper(), name);
         
         // Return the id of the Make object
         return make.getMakeId();

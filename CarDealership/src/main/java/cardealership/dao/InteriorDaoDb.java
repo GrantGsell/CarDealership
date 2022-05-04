@@ -30,10 +30,10 @@ public class InteriorDaoDb implements InteriorDao{
     @Override
     public int getInteriorId(String name) {
         // Create sql statement 
-        final String sql = "SELECT * FROM interiorColor WHERE nameColor = ?;";
+        final String sql = "SELECT * FROM interiorColor WHERE nameInteriorColor = ?;";
         
         // Execute statement and obtain singualr Interior (Color) object
-        Color color = jdbc.queryForObject(sql, new InteriorMapper());
+        Color color = jdbc.queryForObject(sql, new InteriorMapper(), name);
         
         // Return the id of the Interior object
         return color.getColorId();
