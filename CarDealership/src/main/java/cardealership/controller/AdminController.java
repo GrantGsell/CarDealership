@@ -198,6 +198,14 @@ public class AdminController {
         // Obtain the data for the specific vehicle
         Vehicle vehicle = vehicleDao.getVehicleByVIN(vin);
         
+        // Remove values from each list which is already in vehicle
+        typeNames.remove(vehicle.getType().getNameType());
+        bodyStyles.remove(vehicle.getStyle().getNameStyle());
+        colors.remove(vehicle.getColor().getColorId());
+        interiors.remove(vehicle.getInterior().getNameColor());
+        models.remove(vehicle.getModel().getNameModel());
+        makes.remove(vehicle.getMake().getNameMake());
+        
         //Add data to the model object
         model.addAttribute("typeNames",typeNames);
         model.addAttribute("bodyStyles", bodyStyles);
