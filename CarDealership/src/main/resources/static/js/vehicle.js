@@ -46,7 +46,7 @@ const createResultCardDiv = vehicle =>
         <h5 class="mx-5 mt-2">${vehicle.carYear} ${vehicle.make.nameMake} ${vehicle.model.nameModel}</h5>
         <div class="row g-0">
             <div class="col-md-3 text-center">
-                  <img src="${vehicle.pictureUrl}" class="img-fluid rounded-start" style="width: 160px"></img>
+                  <img src="${vehicle.pictureUrl}" alt="/img/no-photo-available-icon-8.jpg" class="img-fluid rounded-start" style="width: 160px"></img>
             </div>
             <div class="col-md-9">
                 <div class="card-body">
