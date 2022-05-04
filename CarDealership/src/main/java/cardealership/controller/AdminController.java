@@ -273,6 +273,8 @@ public class AdminController {
         user.setLastName(lastName);
         user.setEmail(email);
         user.setPassword(password);
+        
+        userDao.createUser(user);
 
         return "admin/users";
     }
