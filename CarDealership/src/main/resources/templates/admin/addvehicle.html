@@ -33,9 +33,9 @@
                             <label for="inputMake">Model</label>
                             <!-- TODO: implement with database -->
                             <select id="inputModel" class="form-control">
-                                <option selected>A4</option>
                                 <option>A5</option>
                                 <option>A6</option>
+                                <option>A7</option>
                             </select>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                             <label for="inputType">Type</label>
                             <!-- TODO: implement with database -->
                             <select id="inputType" class="form-control">
-                                <option selected>New</option>
+                                <option th:each="name : ${typeNames}" th:text="${name}" />
                             </select>
                         </div>
                         <div class="form-group col-md-4">

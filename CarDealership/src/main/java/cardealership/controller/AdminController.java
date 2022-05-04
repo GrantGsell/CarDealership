@@ -4,8 +4,11 @@
  */
 package cardealership.controller;
 
+import cardealership.dao.TypeDao;
 import cardealership.dao.UserDao;
 import cardealership.dao.VehicleDao;
+import cardealership.dto.Type;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +28,9 @@ public class AdminController {
 
     @Autowired
     UserDao userDao;
+    
+    @Autowired
+    TypeDao typeDao;
 
     // vehicles
     @GetMapping("admin/vehicles")
@@ -34,13 +40,18 @@ public class AdminController {
 
     @GetMapping("admin/addvehicle")
     public String getAddVehiclePage(Model model) {
+        // Create a list of all vehicle type names
+        List<String> typeNames = typeDao.getAllTypeNames();
+        
+        //Add data to the model object
+        model.addAttribute("typeNames",typeNames);
+        
         return "admin/addvehicle";
     }
 
     @PostMapping("admin/addvehicle")
-    public String addVehicle(HttpServletRequest request) {
+    public String addVehicle(HttpServletRequest request, Model model) {
         // TODO: Store database for adding vehicle
-
         return "admin/vehicles";
     }
 

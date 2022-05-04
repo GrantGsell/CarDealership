@@ -140,6 +140,11 @@ public class VehicleDaoDb implements VehicleDao{
     }
 
     
+    /**
+     * 
+     * @param vehicle
+     * @return 
+     */
     @Override
     public boolean updateVehicle(Vehicle vehicle) {
         try{
@@ -168,6 +173,12 @@ public class VehicleDaoDb implements VehicleDao{
         return true;
     }
 
+    
+    /**
+     * 
+     * @param makeId
+     * @return 
+     */
     @Override
     public List<Vehicle> getAllVehiclesByMake(int makeId) {
         final String sql = "SELECT * FROM vehicle "
