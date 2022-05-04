@@ -10,8 +10,10 @@ import cardealership.dao.TypeDao;
 import cardealership.dao.UserDao;
 import cardealership.dao.VehicleDao;
 import cardealership.dto.QuickAdd;
+import cardealership.dto.QuickSearch;
 import cardealership.dto.Vehicle;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -59,6 +61,63 @@ public class AdminController {
     @GetMapping("admin/vehicles")
     public String getAdminVehiclesPage() {
         return "admin/vehicles";
+    }
+    
+    @PostMapping("admin/vehicles")
+    @ResponseBody
+    public List<Vehicle> getAdminVehicles(@RequestBody QuickSearch search){
+        List<Vehicle> test = vehicleDao.getAllVehicles().stream()
+                .filter(vehicle -> {
+                    if (!search.getKeyword().isBlank()) {
+                        return vehicle.getMake().getNameMake().contains(search.getKeyword())
+                                || vehicle.getModel().getNameModel().contains(search.getKeyword())
+                                || Integer.toString(vehicle.getCarYear()).equals(search.getKeyword());
+                    }
+                    return true;
+                })
+                .filter(vehicle -> {
+                    if (search.getMinYear() > 0) {
+                        if (search.getMaxYear() > 0) {
+                            return vehicle.getCarYear() >= search.getMinYear()
+                                    && vehicle.getCarYear() <= search.getMaxYear();
+                        } else {
+                            return vehicle.getCarYear() >= search.getMinYear();
+                        }
+                    } else {
+                        if (search.getMaxYear() > 0) {
+                            return vehicle.getCarYear() <= search.getMaxYear();
+                        }
+                    }
+                    // No Minimum year and No Maximum year
+                    return true;
+                })
+                .filter(vehicle -> {
+                    if (search.getMinPrice() != null) {
+                        if (search.getMaxPrice() != null) {
+                            return vehicle.getSalePrice() >= search.getMinPrice().intValue()
+                                    && vehicle.getSalePrice() <= search.getMaxPrice().intValue();
+                        } else {
+                            return vehicle.getSalePrice() >= search.getMinPrice().intValue();
+                        }
+                    } else {
+                        if (search.getMaxPrice() != null) {
+                            return vehicle.getSalePrice() <= search.getMaxPrice().intValue();
+                        }
+                    }
+                    // No Minimum Price and No Maximum Price
+                    return true;
+                })
+                .filter(vehicle -> {
+                    if(search.getType().equals("used"))
+                        return vehicle.getType().getTypeId() == 2;
+                    else if(search.getType().equals("new"))
+                        return vehicle.getType().getTypeId() == 1;
+                    else
+                        return true;
+                })
+                .collect(Collectors.toList());
+        
+        return test;
     }
 
     @GetMapping("admin/addvehicle")
