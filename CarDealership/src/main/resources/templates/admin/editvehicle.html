@@ -14,7 +14,7 @@
 
             <!-- custom contents area for title -->
             <div class="my-3">
-                <h2>Add Vehicle</h2>
+                <h2>Edit Vehicle</h2>
             </div>
 
             <!-- Add a vehicle -->
@@ -25,14 +25,16 @@
                             <label for="inputMake">Make</label>
                             <!-- TODO: implement with database -->
                             <select id="inputMake" class="form-control">
-                                <option th:each="name : ${makes}" th:text="${name}"/>
+                                <option selected="selected" th:text="${vehicle.make.nameMake}"/>
+                                <option th:each="name : ${makes}" th:text="${name}" />
                             </select>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inputMake">Model</label>
                             <!-- TODO: implement with database -->
                             <select id="inputModel" class="form-control">
-                                <option th:each="name : ${models}" th:text="${name}"/>
+                                <option selected="selected" th:text="${vehicle.model.nameModel}"/>
+                                <option th:each="name : ${models}" th:text="${name}" th:value="${vehicle.model.nameModel}"/>
                             </select>
                         </div>
                     </div>
@@ -41,6 +43,7 @@
                             <label for="inputType">Type</label>
                             <!-- TODO: implement with database -->
                             <select id="inputType" class="form-control">
+                                <option selected="selected" th:text="${vehicle.type.nameType}"/>
                                 <option th:each="name : ${typeNames}" th:text="${name}" />
                             </select>
                         </div>
@@ -48,6 +51,7 @@
                             <label for="inputBodyStyle">Body Style</label>
                             <!-- TODO: implement with database -->
                             <select id="inputBodyStyle" class="form-control">
+                                <option selected="selected" th:text="${vehicle.style.nameStyle}"/>
                                 <option th:each="name : ${bodyStyles}" th:text="${name}"/>
                             </select>
                         </div>
@@ -55,12 +59,13 @@
                     <div class="row mb-2">
                         <div class="form-group col-md-4">
                             <label for="inputYear">Year</label>
-                            <input type="number" class="form-control" id="inputYear" min="1900" max="2023"/>
+                            <input type="number" class="form-control" id="inputYear" min="1900" max="2023" th:field="${vehicle.carYear}"/>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inputTransmission">Transmission</label>
                             <!-- TODO: implement with database -->
                             <select id="inputTransmission" class="form-control">
+                                <optoin selected="selected" th:text="${vehicle.transmission.transmissionName}"/>
                                 <option th:each="name : ${transmissions}" th:text="${name}"/>
                             </select>
                         </div>
@@ -70,6 +75,7 @@
                             <label for="inputColor">Color</label>
                             <!-- TODO: implement with database -->
                             <select id="inputColor" class="form-control">
+                                <option selected="selected" th:text="${vehicle.color.nameColor}"/>
                                 <option th:each="name : ${colors}" th:text="${name}"/>       
                             </select>
                         </div>
@@ -77,6 +83,7 @@
                             <label for="inputInterior">Interior</label>
                             <!-- TODO: implement with database -->
                             <select id="inputInterior" class="form-control">
+                                <option selected="selected" th:text="${vehicle.interior.nameColor}"/>
                                 <option th:each="name : ${interiors}" th:text="${name}"/>
                             </select>
                         </div>
@@ -84,32 +91,37 @@
                     <div class="row mb-2">
                         <div class="form-group col-md-4">
                             <label for="inputMileage">Mileage</label>
-                            <input type="number" class="form-control" id="inputMileage" min="0" max="999999"/>
+                            <input type="number" class="form-control" id="inputMileage" min="0" max="999999" th:field="${vehicle.mileage}"/>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inputVIN">VIN #</label>
-                            <input type="text" class="form-control" id="inputVIN" maxlength="17"/>
+                            <input type="text" class="form-control" id="inputVIN" maxlength="17" th:field="${vehicle.vin}"></input>
                         </div>
                     </div>
                     <div class="row mb-2">
                         <div class="form-group col-md-4">
                             <label for="inputMSRP">MSRP</label>
-                            <input type="number" class="form-control" id="inputMSRP" min="0" step="0.01"/>
+                            <input type="number" class="form-control" id="inputMSRP" min="0" step="0.01" th:field="${vehicle.msrp}"/>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inputSalesPrice">Sales Price</label>
-                            <input type="number" class="form-control" id="inputSalesPrice" min="0" step="0.01"/>
+                            <input type="number" class="form-control" id="inputSalesPrice" min="0" step="0.01" th:field="${vehicle.salePrice}"/>
                         </div>
                     </div>                
                     <div class="form-group mb-2 col-md-8">
                         <label for="inputDescription">Description</label>
-                        <textarea class="form-control" id="inputDescription" rows="5"></textarea>
+                        <textarea class="form-control" id="inputDescription" rows="5" th:field="${vehicle.carDescription}"></textarea>
                     </div>
                     <div class="row mb-2">
                         <div class="form-group col-md-8">
                             <label for="inputPicture">Picture</label>
-                            <input type="file" class="form-control" id="inputPicture"/>
+                            <input type="file" class="form-control" id="inputPicture" th:field="${vehicle.pictureUrl}"/>
                         </div>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="isFeatured" th:checked="${vehicle.isFeatured}">
+                            Feature this Vehicle
+                        </input>
                     </div>
                     <div class="mt-3">
                         <button id="saveBtn" type="submit" class="btn btn-primary">Save</button>
@@ -122,7 +134,6 @@
         </div>
 
         <!-- custom javascript file location -->
-        <script src="/js/addVehicles.js"></script>
+        <script src="/js/editVehicle.js"></script>
     </body>
 </html>
-

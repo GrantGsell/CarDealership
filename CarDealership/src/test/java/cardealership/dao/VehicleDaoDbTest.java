@@ -196,6 +196,7 @@ public class VehicleDaoDbTest {
         vehicle0.setCarDescription("");
         vehicle0.setPictureUrl("");
         vehicle0.setUserId(1);
+        vehicle0.setIsFeatured(true);
         
         // Create, populate a Model Object
         Model model = new Model();
@@ -271,6 +272,7 @@ public class VehicleDaoDbTest {
         vehicle1.setCarDescription("");
         vehicle1.setPictureUrl("");
         vehicle1.setUserId(1);
+        vehicle1.setIsFeatured(true);
         
         // Create, populate a Model Object
         model = new Model();
@@ -344,6 +346,7 @@ public class VehicleDaoDbTest {
         vehicle2.setCarDescription("");
         vehicle2.setPictureUrl("");
         vehicle2.setUserId(1);
+        vehicle2.setIsFeatured(false);
         
         // Create, populate a Model Object
         model = new Model();

@@ -24,6 +24,7 @@ public class Vehicle {
     private Status status;
     private Make make;
     private int userId;
+    private boolean isFeatured;
 
     // Setters
     public void setVin(String vin) {
@@ -89,6 +90,11 @@ public class Vehicle {
     public void setInterior(Color interior) {
         this.interior = interior;
     }
+    
+    public void setIsFeatured(boolean isFeatured) {
+        this.isFeatured = isFeatured;
+    }
+    
     
     
     // Getters
@@ -156,31 +162,36 @@ public class Vehicle {
         return interior;
     }
 
+    public boolean getIsFeatured() {
+        return isFeatured;
+    }
+
         
     // HashCode Override
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 17 * hash + Objects.hashCode(this.vin);
-        hash = 17 * hash + this.mileage;
-        hash = 17 * hash + this.salePrice;
-        hash = 17 * hash + this.msrp;
-        hash = 17 * hash + this.carYear;
-        hash = 17 * hash + Objects.hashCode(this.carDescription);
-        hash = 17 * hash + Objects.hashCode(this.pictureUrl);
-        hash = 17 * hash + Objects.hashCode(this.model);
-        hash = 17 * hash + Objects.hashCode(this.style);
-        hash = 17 * hash + Objects.hashCode(this.transmission);
-        hash = 17 * hash + Objects.hashCode(this.color);
-        hash = 17 * hash + Objects.hashCode(this.interior);
-        hash = 17 * hash + Objects.hashCode(this.type);
-        hash = 17 * hash + Objects.hashCode(this.status);
-        hash = 17 * hash + Objects.hashCode(this.make);
-        hash = 17 * hash + this.userId;
+        hash = 79 * hash + Objects.hashCode(this.vin);
+        hash = 79 * hash + this.mileage;
+        hash = 79 * hash + this.salePrice;
+        hash = 79 * hash + this.msrp;
+        hash = 79 * hash + this.carYear;
+        hash = 79 * hash + Objects.hashCode(this.carDescription);
+        hash = 79 * hash + Objects.hashCode(this.pictureUrl);
+        hash = 79 * hash + Objects.hashCode(this.model);
+        hash = 79 * hash + Objects.hashCode(this.style);
+        hash = 79 * hash + Objects.hashCode(this.transmission);
+        hash = 79 * hash + Objects.hashCode(this.color);
+        hash = 79 * hash + Objects.hashCode(this.interior);
+        hash = 79 * hash + Objects.hashCode(this.type);
+        hash = 79 * hash + Objects.hashCode(this.status);
+        hash = 79 * hash + Objects.hashCode(this.make);
+        hash = 79 * hash + this.userId;
+        hash = 79 * hash + (this.isFeatured ? 1 : 0);
         return hash;
     }
+    
      
-
     // Equals Override
     @Override
     public boolean equals(Object obj) {
@@ -207,6 +218,9 @@ public class Vehicle {
             return false;
         }
         if (this.userId != other.userId) {
+            return false;
+        }
+        if (this.isFeatured != other.isFeatured) {
             return false;
         }
         if (!Objects.equals(this.vin, other.vin)) {
@@ -241,6 +255,7 @@ public class Vehicle {
         }
         return Objects.equals(this.make, other.make);
     }
+    
     
     
 }
