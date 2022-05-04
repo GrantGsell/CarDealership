@@ -80,7 +80,7 @@
                             <label for="inputInterior">Interior</label>
                             <!-- TODO: implement with database -->
                             <select id="inputInterior" class="form-control">
-                                <option selected>Black</option>
+                                <option th:each="name : ${interiors}" th:text="${name}"/>
                             </select>
                         </div>
                     </div>
