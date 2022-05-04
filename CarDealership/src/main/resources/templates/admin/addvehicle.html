@@ -73,7 +73,7 @@
                             <label for="inputColor">Color</label>
                             <!-- TODO: implement with database -->
                             <select id="inputColor" class="form-control">
-                                <option selected>Black</option>
+                                <option th:each="name : ${colors}" th:text="${name}"/>       
                             </select>
                         </div>
                         <div class="form-group col-md-4">
