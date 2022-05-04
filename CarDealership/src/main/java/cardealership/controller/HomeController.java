@@ -63,14 +63,14 @@ public class HomeController {
         Contact.setemail(email);
         Contact.setphone(phone);
         contact.setMessage(message);
-
+/*
         Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
         violations = validate.validate(contact);
 
         if (violations.isEmpty()) {
             ContactDao.addContact(contact);
         }
-
+*/
         return "redirect:/contact";
     }
 
@@ -87,6 +87,7 @@ public class HomeController {
 
         Special special = new Special();
         Special.settitle(title);
+        /*
         Special.setspecialDescription(specialDescription);
 
         Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
@@ -95,7 +96,7 @@ public class HomeController {
         if (violations.isEmpty()) {
             SpecialDao.addSpecial(special);
         }
-
+*/
         return "redirect:/special";
     }
 }
