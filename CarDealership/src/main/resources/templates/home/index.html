@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns="http://www.w3.org/1999/xhtml">
     <head>
     <!-- include common script files from head.html -->
     <th:block th:include="fragments/head.html :: headerfiles"></th:block>
@@ -24,21 +25,12 @@
         </div>
 
         <div class="row row-cols-1 row-cols-md-3 g-4 px-3 mb-5">
-            <div class="col">
+            <div class="col" th:each="vehicle : ${featuredVehicles}">
                 <div class="card h-100">
                     <img src="/img/no-photo-available-icon-8.jpg" class="rounded mx-auto d-block" style="width: 240px" alt="No Photo Available">
                     <div class="card-body text-center">
-                        <h5 class="card-title">2019 Ford</h5>
-                        <p class="card-text">$18,000</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100">
-                    <img src="/img/no-photo-available-icon-8.jpg" class="rounded mx-auto d-block" style="width: 240px" alt="No Photo Available">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">2020 Honda</h5>
-                        <p class="card-text">$20,000</p>
+                        <h5 class="card-title" th:text="${vehicle.carYear} + ' ' + ${vehicle.make.nameMake} + ' ' + ${vehicle.model.nameModel}"></h5>
+                        <p class="card-text" th:text="'$' + ${vehicle.salePrice}"></p>
                     </div>
                 </div>
             </div>
@@ -68,7 +60,7 @@
                     $('#specialDescription').text(specials[index].description);
                 }, seconds * 1000);
             };    
-        </script>        
+        </script>
     </div>
 </body>
 </html>

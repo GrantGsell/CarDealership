@@ -6,13 +6,14 @@ package cardealership.controller;
 
 import cardealership.dao.ContactDao;
 import cardealership.dao.SpecialDao;
+import cardealership.dao.VehicleDao;
 import cardealership.dto.Contact;
 import cardealership.dto.Special;
+import cardealership.dto.Vehicle;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.ldap.embedded.EmbeddedLdapProperties.Validation;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +33,9 @@ public class HomeController {
 
     @Autowired
     SpecialDao specialDao;
+    
+    @Autowired
+    VehicleDao vehicleDao;
 
     // Handling Get Request for multiple value
     @RequestMapping(value = {"/", "home", "home/index"}, method = RequestMethod.GET)
@@ -43,6 +47,17 @@ public class HomeController {
         } else {
             model.addAttribute("specials", specials);
         }
+        
+        //Obtain a list of all vehicles and filter to get only featured vehicles
+        List<Vehicle> featuredVehicles = vehicleDao.getAllVehicles().stream()
+                .filter(vehicle ->{
+                    return vehicle.getIsFeatured();
+                })
+                .collect(Collectors.toList());
+        
+        // Add the list of featured vehicles to the model object
+        model.addAttribute("featuredVehicles", featuredVehicles);
+        
         return "home/index";
     }
 
