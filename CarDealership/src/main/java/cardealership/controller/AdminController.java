@@ -205,6 +205,25 @@ public class AdminController {
         
         return "admin/editvehicle";
     }
+    
+    @PostMapping("admin/editvehicle/{vin}")
+    @ResponseBody
+    public String editVehicle(@RequestBody QuickAdd request) {
+        // Create a Vehicle Object
+        Vehicle vehicle = new Vehicle();
+        
+        // Populate the fields using QuickAdd toVehicle method
+        request.toVehicle(vehicle, typeDao, bodyStyleDao, transmissionDao, 
+                colorDao, interiorDao, modelDao, makeDao);
+        
+        // Set vehicle isFeatured field
+        vehicle.setIsFeatured(request.getIsFeatured());
+        
+        // Write the vehicle data to the database
+        vehicleDao.create(vehicle);
+        
+        return "admin/vehicles";
+    }
 
     // users
     @GetMapping("admin/users")

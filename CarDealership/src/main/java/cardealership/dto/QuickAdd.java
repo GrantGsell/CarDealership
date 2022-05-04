@@ -31,6 +31,7 @@ public class QuickAdd {
     int salePrice;
     String description;
     String picture;
+    boolean isFeatured;
             
     
     // Getters
@@ -89,6 +90,10 @@ public class QuickAdd {
     public String getPicture() {
         return picture;
     }
+
+    public boolean getIsFeatured() {
+        return isFeatured;
+    }   
     
     
     // Setters
@@ -147,6 +152,11 @@ public class QuickAdd {
     public void setPicture(String picture) {
         this.picture = picture;
     }
+
+    public void setIsFeatured(boolean isFeatured) {
+        this.isFeatured = isFeatured;
+    }
+    
     
     
     // HashCode override
