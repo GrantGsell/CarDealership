@@ -4,6 +4,7 @@
  */
 package cardealership.dao;
 
+import cardealership.dto.InventoryReport;
 import cardealership.dto.PurchaseType;
 import cardealership.dto.Sales;
 import cardealership.dto.SalesReport;
@@ -40,4 +41,8 @@ public interface SalesDao {
     List<State> getAllState();
 
     List<SalesReport> getAllSalesReport(SalesReportSearchForm searchForm);
+
+    List<InventoryReport> getInventoryReportForNewVehicles();
+
+    List<InventoryReport> getInventoryReportForUsedVehicles();
 }

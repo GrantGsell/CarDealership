@@ -6,6 +6,7 @@ package cardealership.dao;
 
 import cardealership.dao.UserDaoDB.UserMapper;
 import cardealership.dao.VehicleDaoDb.VehicleMapper;
+import cardealership.dto.InventoryReport;
 import cardealership.dto.PurchaseType;
 import cardealership.dto.Sales;
 import cardealership.dto.SalesReport;
@@ -86,6 +87,21 @@ public class SalesDaoDB implements SalesDao {
             salesReport.setTotalCount(rs.getInt("totalCount"));
 
             return salesReport;
+        }
+    }
+
+    public static final class InventoryReportMapper implements RowMapper<InventoryReport> {
+
+        @Override
+        public InventoryReport mapRow(ResultSet rs, int index) throws SQLException {
+            InventoryReport inventoryReport = new InventoryReport();
+            inventoryReport.setYear(rs.getInt("year"));
+            inventoryReport.setMake(rs.getString("make"));
+            inventoryReport.setModel(rs.getString("model"));
+            inventoryReport.setCount(rs.getInt("count"));
+            inventoryReport.setStockValue(rs.getBigDecimal("stockValue"));
+
+            return inventoryReport;
         }
     }
 
@@ -276,9 +292,33 @@ public class SalesDaoDB implements SalesDao {
         return jdbc.query(GET_ALL_SALES_REPORT, new SalesReportMapper());
     }
 
-    private void associateOtherFieldsForSales(Sales sales) {
-        // TODO: remove comment after building methods in User and Vehicle class
+    @Override
+    public List<InventoryReport> getInventoryReportForNewVehicles() {
+        final String GET_INVENTORY_REPORT_FOR_NEW_VEHICLES
+                = "SELECT v.carYear as year, make.nameMake as make, "
+                + "m.nameModel as model, count(*) as count, sum(msrp) as stockValue "
+                + "FROM (SELECT * FROM vehicle WHERE typeId = 1) v "
+                + "JOIN model m ON v.modelId = m.modelId "
+                + "JOIN make on m.makeId = make.makeId "
+                + "GROUP BY carYear, make.nameMake, m.nameModel";
 
+        return jdbc.query(GET_INVENTORY_REPORT_FOR_NEW_VEHICLES, new InventoryReportMapper());
+    }
+
+    @Override
+    public List<InventoryReport> getInventoryReportForUsedVehicles() {
+        final String GET_INVENTORY_REPORT_FOR_USED_VEHICLES
+                = "SELECT v.carYear as year, make.nameMake as make, "
+                + "m.nameModel as model, count(*) as count, sum(msrp) as stockValue "
+                + "FROM (SELECT * FROM vehicle WHERE typeId = 2) v "
+                + "JOIN model m ON v.modelId = m.modelId "
+                + "JOIN make on m.makeId = make.makeId "
+                + "GROUP BY carYear, make.nameMake, m.nameModel";
+
+        return jdbc.query(GET_INVENTORY_REPORT_FOR_USED_VEHICLES, new InventoryReportMapper());
+    }
+
+    private void associateOtherFieldsForSales(Sales sales) {
         sales.setState(getStateForSales(sales.getSalesId()));
         sales.setVehicle(getVehicleForSales(sales.getSalesId()));
         sales.setPurchaseType(getPurchaseTypeForSales(sales.getSalesId()));

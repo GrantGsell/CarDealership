@@ -15,45 +15,54 @@
         <div class="my-3">
             <h2>Inventory Report</h2>
         </div>
-        <div>
-            <p> New Vehicles </p>
+
+        <div class="mt-3 mb-5 col-8">
+            <h4>New Vehicles</h4>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Year</th>
+                        <th scope="col">Make</th>
+                        <th scope="col">Model</th>
+                        <th scope="col">Count</th>
+                        <th scope="col">Stock Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="vehicle : ${newVehicles}">
+                        <td th:text="${vehicle.year}"></td>
+                        <td th:text="${vehicle.make}"></td>
+                        <td th:text="${vehicle.model}"></td>
+                        <td th:text="${vehicle.count}"></td>
+                        <td th:text="${vehicle.stockValue}"></td>
+                    </tr>                        
+                </tbody>
+            </table>
         </div>
-        <!-- https://www.w3schools.com/js/js_ajax_applications.asp -->
-        <!-- 
-                <table id="demo"></table>
-
-                <script>
-                function loadXMLDoc() {
-                  const xhttp = new XMLHttpRequest();
-                  xhttp.onload = function() {
-                    const xmlDoc = xhttp.responseXML;
-                    const cd = xmlDoc.getElementsByTagName("CD");
-                    myFunction(cd);
-                  }
-                  xhttp.open("GET", "cd_catalog.xml");
-                  xhttp.send();
-                }
-
-                function myFunction(cd) {
-                  let table="<tr><th>Artist</th><th>Title</th></tr>";
-                  for (let i = 0; i < cd.length; i++) {
-                    table += "<tr><td>" +
-                    cd[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue +
-                    "</td><td>" +
-                    cd[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue +
-                    "</td></tr>";
-                  }
-                  document.getElementById("demo").innerHTML = table;
-                }
-                </script>
-        -->
-
-        <div>
-            <p> Used Vehicles </p>
-        </div>
-        <!-- 
-            Display user list 
-        -->
+        
+        <div class="mb-5 col-8">
+            <h4>Used Vehicles</h4>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Year</th>
+                        <th scope="col">Make</th>
+                        <th scope="col">Model</th>
+                        <th scope="col">Count</th>
+                        <th scope="col">Stock Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="vehicle : ${usedVehicles}">
+                        <td th:text="${vehicle.year}"></td>
+                        <td th:text="${vehicle.make}"></td>
+                        <td th:text="${vehicle.model}"></td>
+                        <td th:text="${vehicle.count}"></td>
+                        <td th:text="${vehicle.stockValue}"></td>
+                    </tr>                        
+                </tbody>
+            </table>
+        </div>        
 
         <!-- footer -->
         <div th:replace="fragments/footer.html :: footer"></div>

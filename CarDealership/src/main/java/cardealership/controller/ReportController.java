@@ -38,7 +38,10 @@ public class ReportController {
     }
 
     @GetMapping("reports/inventory")
-    public String getInventoryReportsPage() {
+    public String getInventoryReportsPage(Model model) {
+        model.addAttribute("newVehicles", salesDao.getInventoryReportForNewVehicles());
+        model.addAttribute("usedVehicles", salesDao.getInventoryReportForUsedVehicles());
+
         return "reports/inventory";
     }
 
