@@ -4,10 +4,10 @@
  */
 package cardealership.controller;
 
+import cardealership.dao.BodyStyleDao;
 import cardealership.dao.TypeDao;
 import cardealership.dao.UserDao;
 import cardealership.dao.VehicleDao;
-import cardealership.dto.Type;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +31,9 @@ public class AdminController {
     
     @Autowired
     TypeDao typeDao;
+    
+    @Autowired
+    BodyStyleDao bodyStyleDao;
 
     // vehicles
     @GetMapping("admin/vehicles")
@@ -43,8 +46,12 @@ public class AdminController {
         // Create a list of all vehicle type names
         List<String> typeNames = typeDao.getAllTypeNames();
         
+        // Create a list of all vehicle bodystyles
+        List<String> bodyStyles = bodyStyleDao.getAllBodyStyleNames();
+        
         //Add data to the model object
         model.addAttribute("typeNames",typeNames);
+        model.addAttribute("bodyStyles", bodyStyles);
         
         return "admin/addvehicle";
     }

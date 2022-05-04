@@ -51,7 +51,7 @@
                             <label for="inputBodyStyle">Body Style</label>
                             <!-- TODO: implement with database -->
                             <select id="inputBodyStyle" class="form-control">
-                                <option selected>Car</option>
+                                <option th:each="name : ${bodyStyles}" th:text="${name}"/>
                             </select>
                         </div>
                     </div>
