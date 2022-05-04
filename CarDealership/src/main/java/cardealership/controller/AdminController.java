@@ -13,10 +13,13 @@ import cardealership.dao.UserDao;
 import cardealership.dao.VehicleDao;
 import cardealership.dto.QuickAdd;
 import cardealership.dto.QuickSearch;
+import cardealership.dto.User;
 import cardealership.dto.Vehicle;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.validation.Validator;
+import javax.validation.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -62,7 +65,7 @@ public class AdminController {
 
     @Autowired
     SpecialDao specialDao;
-
+    
     // vehicles
     @GetMapping("admin/vehicles")
     public String getAdminVehiclesPage() {
@@ -71,7 +74,7 @@ public class AdminController {
 
     @PostMapping("admin/vehicles")
     @ResponseBody
-    public List<Vehicle> getAdminVehicles(@RequestBody QuickSearch search){
+    public List<Vehicle> getAdminVehicles(@RequestBody QuickSearch search) {
         List<Vehicle> test = vehicleDao.getAllVehicles().stream()
                 .filter(vehicle -> {
                     if (!search.getKeyword().isBlank()) {
@@ -114,12 +117,13 @@ public class AdminController {
                     return true;
                 })
                 .filter(vehicle -> {
-                    if(search.getType().equals("used"))
+                    if (search.getType().equals("used")) {
                         return vehicle.getType().getTypeId() == 2;
-                    else if(search.getType().equals("new"))
+                    } else if (search.getType().equals("new")) {
                         return vehicle.getType().getTypeId() == 1;
-                    else
+                    } else {
                         return true;
+                    }
                 })
                 .collect(Collectors.toList());
 
@@ -150,7 +154,7 @@ public class AdminController {
         List<String> makes = makeDao.getAllMakeNames();
 
         //Add data to the model object
-        model.addAttribute("typeNames",typeNames);
+        model.addAttribute("typeNames", typeNames);
         model.addAttribute("bodyStyles", bodyStyles);
         model.addAttribute("transmissions", transmissions);
         model.addAttribute("colors", colors);
@@ -178,7 +182,7 @@ public class AdminController {
     }
 
     @GetMapping("admin/editvehicle/{vin}")
-    public String editVehicle(@PathVariable String vin, Model model){
+    public String editVehicle(@PathVariable String vin, Model model) {
         // Create a list of all vehicle type names
         List<String> typeNames = typeDao.getAllTypeNames();
 
@@ -212,7 +216,7 @@ public class AdminController {
         makes.remove(vehicle.getMake().getNameMake());
 
         //Add data to the model object
-        model.addAttribute("typeNames",typeNames);
+        model.addAttribute("typeNames", typeNames);
         model.addAttribute("bodyStyles", bodyStyles);
         model.addAttribute("transmissions", transmissions);
         model.addAttribute("colors", colors);
@@ -259,6 +263,17 @@ public class AdminController {
     @PostMapping("admin/adduser")
     public String addUser(HttpServletRequest request) {
         // TODO: Store database for adding vehicle
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+
+        User user = new User();
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setEmail(email);
+        user.setPassword(password);
+
         return "admin/users";
     }
 

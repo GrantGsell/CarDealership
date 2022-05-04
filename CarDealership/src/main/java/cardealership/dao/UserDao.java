@@ -13,6 +13,9 @@ import java.util.List;
  * @author Jeonghoon
  */
 public interface UserDao {
+
+    public void addUser(User user);
+    
     public User createUser(User user);
 
     public List<User> getAllUsers();
