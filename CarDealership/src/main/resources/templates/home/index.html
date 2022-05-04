@@ -26,8 +26,8 @@
 
         <div class="row row-cols-1 row-cols-md-3 g-4 px-3 mb-5">
             <div class="col" th:each="vehicle : ${featuredVehicles}">
-                <div class="card h-100">
-                    <img src="/img/no-photo-available-icon-8.jpg" class="rounded mx-auto d-block" style="width: 240px" alt="No Photo Available">
+                <div class="card h-100">         
+                    <img th:src="${vehicle.pictureUrl}" class="rounded mx-auto d-block" style="width: 240px" alt="No Photo Available">
                     <div class="card-body text-center">
                         <h5 class="card-title" th:text="${vehicle.carYear} + ' ' + ${vehicle.make.nameMake} + ' ' + ${vehicle.model.nameModel}"></h5>
                         <p class="card-text" th:text="'$' + ${vehicle.salePrice}"></p>

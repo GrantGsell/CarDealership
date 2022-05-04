@@ -26,7 +26,7 @@
                 <h5 class="mx-5 mt-2" th:text = "${vehicle.carYear} + ' ' + ${vehicle.make.nameMake} + ' ' + ${vehicle.model.nameModel}"></h5>
                 <div class="row g-0">
                     <div class="col-md-3 text-center">
-                        <img src="/img/no-photo-available-icon-8.jpg" class="img-fluid rounded-start" alt="No photo" style="width: 160px" />
+                        <img th:src="${vehicle.pictureUrl}" class="img-fluid rounded-start" alt="/img/no-photo-available-icon-8.jpg" style="width: 160px" />
                     </div>
                     <div class="col-md-9">
                         <div class="card-body">
