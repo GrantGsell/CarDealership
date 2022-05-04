@@ -170,6 +170,41 @@ public class AdminController {
         
         return "admin/vehicles";
     }
+    
+    @GetMapping("admin/editvehicle/{vin}")
+    public String editVehicle(Model model){
+        // Create a list of all vehicle type names
+        List<String> typeNames = typeDao.getAllTypeNames();
+        
+        // Create a list of all vehicle bodystyles
+        List<String> bodyStyles = bodyStyleDao.getAllBodyStyleNames();
+        
+        // Create a list of all vehicle transmissions
+        List<String> transmissions = transmissionDao.getAllTransmissionNames();
+        
+        // Create a list of all vehicle colors
+        List<String> colors = colorDao.getAllColorNames();
+        
+        // Create a list of all interior colors
+        List<String> interiors = interiorDao.getAllInteriorNames();
+        
+        // Create a list of all vehicle models
+        List<String> models = modelDao.getAllModelNames();
+        
+        // Create a list of all vehicle makes
+        List<String> makes = makeDao.getAllMakeNames();
+        
+        //Add data to the model object
+        model.addAttribute("typeNames",typeNames);
+        model.addAttribute("bodyStyles", bodyStyles);
+        model.addAttribute("transmissions", transmissions);
+        model.addAttribute("colors", colors);
+        model.addAttribute("interiors", interiors);
+        model.addAttribute("models", models);
+        model.addAttribute("makes", makes);
+        
+        return "admin/editvehicle";
+    }
 
     // users
     @GetMapping("admin/users")
