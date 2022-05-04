@@ -57,12 +57,12 @@ insert into interiorColor (nameInteriorColor)
  insert into status (nameStatus)
 	values ('Sold'), ('Available');
 
- insert into vehicle (vin, mileage, salePrice, msrp, carYear, carDescription, modelId, styleId, transmissionId, colorId, typeId, statusId, userId, interiorColorId, isFeatured)
-	values ('1234567890ABCDEFG', 100000, 10000.00, 11000.00, 2016, 'Good condition', 1, 1, 1, 1, 1, 1, 1, 5, false),
-    ('2234567890ABCDEFG', 50000, 18900.00, 20000.00, 2018, 'Good performance', 1, 2, 1, 4, 1, 2, 1, 5, false),
-    ('3234567890ABCDEFG', 10000, 25555.00, 27000.00, 2021, 'Almost new', 1, 2, 1, 3, 2, 2, 1, 5, false),
-    ('ABCDEFG3234567890', 10000, 25555.00, 27000.00, 2021, 'Almost new', 1, 2, 1, 3, 1, 2, 1, 5, true),
-    ('ABCDEFG3234567899', 10000, 25555.00, 27000.00, 2021, 'Almost new', 5, 2, 1, 3, 1, 2, 1, 5, true);
+ insert into vehicle (vin, mileage, salePrice, msrp, carYear, carDescription, modelId, styleId, transmissionId, colorId, typeId, statusId, userId, interiorColorId, isFeatured, pictureUrl)
+	values ('1234567890ABCDEFG', 100000, 10000.00, 11000.00, 2016, 'Good condition', 1, 1, 1, 1, 1, 1, 1, 5, false, "https://pictures.topspeed.com/IMG/crop_webp/201706/ford-focus-rs-driven_1920x1080.webp"),
+    ('2234567890ABCDEFG', 50000, 18900.00, 20000.00, 2018, 'Good performance', 1, 2, 1, 4, 1, 2, 1, 5, false, "https://pictures.topspeed.com/IMG/crop_webp/201706/ford-focus-rs-driven_1920x1080.webp"),
+    ('3234567890ABCDEFG', 10000, 25555.00, 27000.00, 2021, 'Almost new', 1, 2, 1, 3, 2, 2, 1, 5, false, "https://pictures.topspeed.com/IMG/crop_webp/201706/ford-focus-rs-driven_1920x1080.webp"),
+    ('ABCDEFG3234567890', 10000, 25555.00, 27000.00, 2021, 'Almost new', 1, 2, 1, 3, 1, 2, 1, 5, true, "https://www.motortrend.com/uploads/sites/5/2020/06/2021-Honda-Pilot-Elite-3.jpg"),
+    ('ABCDEFG3234567899', 10000, 25555.00, 27000.00, 2021, 'Almost new', 5, 2, 1, 3, 1, 2, 1, 5, true, "https://pictures.topspeed.com/IMG/crop_webp/201706/ford-focus-rs-driven_1920x1080.webp");
 
 insert into purchaseType (purchaseName)
 	values ('Bank Finance'), ('Cash'), ('Dealer Finance');
