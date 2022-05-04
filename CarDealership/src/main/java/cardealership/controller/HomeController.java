@@ -33,7 +33,7 @@ public class HomeController {
 
     @Autowired
     SpecialDao specialDao;
-    
+
     @Autowired
     VehicleDao vehicleDao;
 
@@ -47,17 +47,17 @@ public class HomeController {
         } else {
             model.addAttribute("specials", specials);
         }
-        
+
         //Obtain a list of all vehicles and filter to get only featured vehicles
         List<Vehicle> featuredVehicles = vehicleDao.getAllVehicles().stream()
                 .filter(vehicle ->{
                     return vehicle.getIsFeatured();
                 })
                 .collect(Collectors.toList());
-        
+
         // Add the list of featured vehicles to the model object
         model.addAttribute("featuredVehicles", featuredVehicles);
-        
+
         return "home/index";
     }
 
@@ -78,14 +78,7 @@ public class HomeController {
         Contact.setemail(email);
         Contact.setphone(phone);
         contact.setMessage(message);
-/*
-        Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
-        violations = validate.validate(contact);
 
-        if (violations.isEmpty()) {
-            ContactDao.addContact(contact);
-        }
-*/
         return "redirect:/contact";
     }
 
@@ -95,23 +88,4 @@ public class HomeController {
         return "home/specials";
     }
 
-    @PostMapping("addSpecial")
-    public String addSpecial(HttpServletRequest request) {
-        String title = request.getParameter("title");
-        String description = request.getParameter("specialDescription");
-
-        Special special = new Special();
-        Special.settitle(title);
-        /*
-        Special.setspecialDescription(specialDescription);
-
-        Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
-        violations = validate.validate(special);
-
-        if (violations.isEmpty()) {
-            SpecialDao.addSpecial(special);
-        }
-*/
-        return "redirect:/special";
-    }
 }
