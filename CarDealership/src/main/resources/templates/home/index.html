@@ -43,7 +43,7 @@
         <script th:inline="javascript">
             $(document).ready(() => {
                 displaySpecial(3);
-                $('#jumbotron').click(() => alert('clicked'));
+                $('#jumbotron').click(() => window.location.href = "http://localhost:8080/home/specials");
                 $('#jumbotron').hover(function() {
                     $(this).css('cursor','pointer');
                 });
