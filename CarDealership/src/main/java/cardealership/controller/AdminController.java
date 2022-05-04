@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -172,7 +173,7 @@ public class AdminController {
     }
     
     @GetMapping("admin/editvehicle/{vin}")
-    public String editVehicle(Model model){
+    public String editVehicle(@PathVariable String vin, Model model){
         // Create a list of all vehicle type names
         List<String> typeNames = typeDao.getAllTypeNames();
         
@@ -194,6 +195,9 @@ public class AdminController {
         // Create a list of all vehicle makes
         List<String> makes = makeDao.getAllMakeNames();
         
+        // Obtain the data for the specific vehicle
+        Vehicle vehicle = vehicleDao.getVehicleByVIN(vin);
+        
         //Add data to the model object
         model.addAttribute("typeNames",typeNames);
         model.addAttribute("bodyStyles", bodyStyles);
@@ -202,6 +206,7 @@ public class AdminController {
         model.addAttribute("interiors", interiors);
         model.addAttribute("models", models);
         model.addAttribute("makes", makes);
+        model.addAttribute("vehicle", vehicle);
         
         return "admin/editvehicle";
     }
@@ -220,7 +225,7 @@ public class AdminController {
         vehicle.setIsFeatured(request.getIsFeatured());
         
         // Write the vehicle data to the database
-        vehicleDao.create(vehicle);
+        vehicleDao.updateVehicle(vehicle);
         
         return "admin/vehicles";
     }
