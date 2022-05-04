@@ -4,7 +4,7 @@
         <!-- include common script files from head.html -->
         <th:block th:include="fragments/head.html :: headerfiles"></th:block>
         <title>Guild Car: home</title>
-        <!--<th:block th:include="fragments/quicksearch.html :: datepicker-headerfiles"></th:block>-->
+        <th:block th:include="fragments/quicksearch.html :: datepicker-headerfiles"></th:block>
     </head>
     <body>
         <div class="container d-flex flex-column min-vh-100">
@@ -27,7 +27,7 @@
                                         <!-- get list from database -->
                                         <select id="selectUser" name="userId" class="form-control">
                                             <option value="0">-All-</option>
-                                            <!--<option th:each="user : ${users}" th:value="${user.userId}" th:text="${user.lastName}"></option>-->
+                                            <option th:each="user : ${users}" th:value="${user.userId}" th:text="|${user.firstName} ${user.lastName}|"></option>
                                         </select>
                                     </div>
                                 </div>                   
@@ -36,10 +36,10 @@
                                         <label class="col-form-label">Date</label>
                                     </div>
                                     <div class="col-auto">
-                                        <input type="text" class="datepicker form-control text-center" name="fromDate" id="selectFromDate" placeholder="From"/>
+                                        <input type="text" class="datepicker form-control text-center" name="fromDate" id="selectFromDate" data-date-format="yyyy-mm-dd" placeholder="From"/>
                                     </div>
                                     <div class="col-auto">
-                                        <input type="text" class="datepicker form-control text-center" name="toDate" id="selectToDate" placeholder="To"/>
+                                        <input type="text" class="datepicker form-control text-center" name="toDate" id="selectToDate" data-date-format="yyyy-mm-dd" placeholder="To"/>
                                     </div>
                                 </div>                    
                             </div>
@@ -51,14 +51,27 @@
                 </div>
             </div>
 
-            <!-- 
-                Display user list 
-            -->
+            <div class="my-5 d-none" id="resultContainer">
+                <h2>Search Results</h2>
+                <table class="table table-striped" style="width: 70%">
+                    <thead>
+                      <tr>
+                        <th scope="col">User</th>
+                        <th scope="col" class="text-center">Total Sales Amount</th>
+                        <th scope="col" class="text-center">Total Vehicles</th>
+                      </tr>
+                    </thead>
+                    <tbody id="resultTable">
+                        
+                    </tbody>
+                </table>
+            </div>  
 
             <!-- footer -->
             <div th:replace="fragments/footer.html :: footer"></div>
         </div>
 
         <!-- custom javascript file location -->
+        <script src="/js/report-sales.js"></script>
     </body>
 </html>

@@ -6,6 +6,8 @@ package cardealership.dao;
 
 import cardealership.dto.PurchaseType;
 import cardealership.dto.Sales;
+import cardealership.dto.SalesReport;
+import cardealership.dto.SalesReportSearchForm;
 import cardealership.dto.State;
 import java.util.List;
 
@@ -36,4 +38,6 @@ public interface SalesDao {
     State getStateById(int id);
 
     List<State> getAllState();
+
+    List<SalesReport> getAllSalesReport(SalesReportSearchForm searchForm);
 }

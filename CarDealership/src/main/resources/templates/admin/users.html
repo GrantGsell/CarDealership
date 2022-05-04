@@ -17,9 +17,28 @@
                 <a href="/admin/adduser" type="button" class="btn btn-outline-primary">Add a new User</a>
             </div>
 
-            <!-- 
-                Display user list 
-            -->
+            <div class="mb-5">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Role</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="user : ${users}">
+                            <td th:text="${user.lastName}"></td>
+                            <td th:text="${user.firstName}"></td>
+                            <td th:text="${user.email}"></td>
+                            <td th:text="${user.role.name}"></td>
+                            <td><a th:href="|/admin/edituser/${user.userId}|" type="button" class="btn btn-primary btn-sm px-3">Edit</a></td>
+                        </tr>                        
+                    </tbody>
+                </table>
+            </div>
 
             <!-- footer -->
             <div th:replace="fragments/footer.html :: footer"></div>

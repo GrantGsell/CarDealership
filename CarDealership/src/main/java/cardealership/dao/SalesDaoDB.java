@@ -4,9 +4,15 @@
  */
 package cardealership.dao;
 
+import cardealership.dao.UserDaoDB.UserMapper;
+import cardealership.dao.VehicleDaoDb.VehicleMapper;
 import cardealership.dto.PurchaseType;
 import cardealership.dto.Sales;
+import cardealership.dto.SalesReport;
+import cardealership.dto.SalesReportSearchForm;
 import cardealership.dto.State;
+import cardealership.dto.User;
+import cardealership.dto.Vehicle;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -66,6 +72,20 @@ public class SalesDaoDB implements SalesDao {
             purchaseType.setPurchaseName(rs.getString("purchaseName"));
 
             return purchaseType;
+        }
+    }
+
+    public static final class SalesReportMapper implements RowMapper<SalesReport> {
+
+        @Override
+        public SalesReport mapRow(ResultSet rs, int index) throws SQLException {
+            SalesReport salesReport = new SalesReport();
+            salesReport.setUserId(rs.getInt("userId"));
+            salesReport.setUserName(rs.getString("userName"));
+            salesReport.setTotalSalesAmount(rs.getBigDecimal("totalSalesAmount"));
+            salesReport.setTotalCount(rs.getInt("totalCount"));
+
+            return salesReport;
         }
     }
 
@@ -218,13 +238,51 @@ public class SalesDaoDB implements SalesDao {
         return stateList;
     }
 
+    @Override
+    public List<SalesReport> getAllSalesReport(SalesReportSearchForm searchForm) {
+        String whereClause = "";
+
+        if (searchForm.getUserId() != 0) {
+            whereClause = searchForm.getUserId() + " = u.userId";
+        }
+        if (searchForm.getFromDate() != null) {
+            if (!whereClause.isEmpty()) {
+                whereClause = whereClause + " AND '" + searchForm.getFromDate() + "' <= s.purchasedAt";
+            } else {
+                whereClause = "'" + searchForm.getFromDate() + "' <= s.purchasedAt";
+            }
+        }
+        if (searchForm.getToDate() != null) {
+            if (!whereClause.isEmpty()) {
+                whereClause = whereClause + " AND '" + searchForm.getToDate() + "' >= s.purchasedAt";
+            } else {
+                whereClause = "'" + searchForm.getToDate() + "' >= s.purchasedAt";
+            }
+        }
+
+        if (!whereClause.isEmpty()) {
+            whereClause = "WHERE " + whereClause;
+        }
+
+        final String GET_ALL_SALES_REPORT = String.format(
+                "SELECT r.userId, r.userName, "
+                + "SUM(r.purchasePrice) AS 'totalSalesAmount', COUNT(r.userId) AS 'totalCount' "
+                + "FROM ("
+                + "SELECT u.userId, CONCAT(u.firstName, ' ', u.lastName) AS 'userName', "
+                + "s.purchasePrice, s.purchasedAt FROM user u "
+                + "JOIN salesInfo s on u.userId = s.userId "
+                + "%s) r GROUP BY r.userId", whereClause);
+
+        return jdbc.query(GET_ALL_SALES_REPORT, new SalesReportMapper());
+    }
+
     private void associateOtherFieldsForSales(Sales sales) {
         // TODO: remove comment after building methods in User and Vehicle class
 
         sales.setState(getStateForSales(sales.getSalesId()));
-//        sales.setVehicle(getVehicleForSales(sales.getSalesId()));
+        sales.setVehicle(getVehicleForSales(sales.getSalesId()));
         sales.setPurchaseType(getPurchaseTypeForSales(sales.getSalesId()));
-//        sales.setUser(getUserForSales(sales.getSalesId()));
+        sales.setUser(getUserForSales(sales.getSalesId()));
     }
 
     private void associateOtherFieldsForSalesList(List<Sales> salesList) {
@@ -243,4 +301,15 @@ public class SalesDaoDB implements SalesDao {
         return jdbc.queryForObject(SELECT_PURCHASE_TYPE_FOR_SALES, new PurchaseTypeMapper(), salesId);
     }
 
+    private Vehicle getVehicleForSales(int salesId) {
+        final String SELECT_VEHICLE_FOR_SALES = "SELECT v.* FROM vehicle v "
+                + "JOIN salesInfo s ON v.vin = s.vin WHERE s.salesId = ?";
+        return jdbc.queryForObject(SELECT_VEHICLE_FOR_SALES, new VehicleMapper(), salesId);
+    }
+
+    private User getUserForSales(int salesId) {
+        final String SELECT_USER_FOR_SALES = "SELECT u.* FROM user u "
+                + "JOIN salesInfo s ON u.userId = s.userId WHERE s.salesId = ?";
+        return jdbc.queryForObject(SELECT_USER_FOR_SALES, new UserMapper(), salesId);
+    }
 }

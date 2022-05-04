@@ -4,8 +4,20 @@
  */
 package cardealership.controller;
 
+import cardealership.dao.SalesDao;
+import cardealership.dao.UserDao;
+import cardealership.dto.SalesReport;
+import cardealership.dto.SalesReportSearchForm;
+import cardealership.dto.User;
+import java.util.List;
+import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
@@ -13,6 +25,12 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class ReportController {
+
+    @Autowired
+    UserDao userDao;
+
+    @Autowired
+    SalesDao salesDao;
 
     @GetMapping("reports/index")
     public String getReportsPage() {
@@ -25,7 +43,20 @@ public class ReportController {
     }
 
     @GetMapping("reports/sales")
-    public String getSalesReportsPage() {
+    public String getSalesReportsPage(Model model) {
+        List<User> salesUsers = userDao.getAllUsers()
+                .stream()
+                .filter(user -> user.getRole().getUserRoleId() == 2)
+                .collect(Collectors.toList());
+
+        model.addAttribute("users", salesUsers);
+
         return "reports/sales";
+    }
+
+    @PostMapping("report/sales")
+    @ResponseBody
+    public List<SalesReport> searchSalesReport(@RequestBody SalesReportSearchForm searchForm) {
+        return salesDao.getAllSalesReport(searchForm);
     }
 }
