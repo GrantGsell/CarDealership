@@ -4,7 +4,6 @@
         <!-- include common script files from head.html -->
         <th:block th:include="fragments/head.html :: headerfiles"></th:block>
         <title>Guild Car: home</title>
-        <th:block th:include="fragments/quicksearch.html :: datepicker-headerfiles"></th:block>
     </head>
     <body>
         <div class="container d-flex flex-column min-vh-100">
@@ -13,7 +12,27 @@
 
             <!-- custom contents area for title -->
             <div class="my-3">
-                <h2>Make</h2>
+                <h2>Makes</h2>
+                <div class="card col-8">
+                    <div class="card-body">
+                        <h4 class="card-title">Filter</h4>
+                        <form>
+                            <div class="row g-2 mt-2">             
+                                <div class="form-group row mr-1">
+                                    <div class="col-2" style="text-align: right">
+                                        <label class="col-form-label">New Make</label>
+                                    </div>
+                                    <div class="col-auto">
+                                        <input type="text" class="form-control" name="make" />
+                                    </div>
+                                    <div class="col-auto">
+                                        <button id="save" class="btn btn-primary px-3">Save</button>
+                                    </div>
+                                </div>                    
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
 
             <!-- 

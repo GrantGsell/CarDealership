@@ -27,4 +27,6 @@ public interface UserDao {
     public User getUserById(int id);
 
     public List<UserRole> getAllUserRoles();
+
+    public UserRole getRoleById(int id);
 }

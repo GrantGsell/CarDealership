@@ -278,9 +278,23 @@ public class AdminController {
     }
 
     @GetMapping("admin/edituser/{id}")
-    public String getEditUserPage(@PathVariable int id, HttpServletRequest request) {
+    public String getEditUserPage(@PathVariable int id, Model model) {
+        model.addAttribute("userRoles", userDao.getAllUserRoles());
+        model.addAttribute("user", userDao.getUserById(id));
 
         return "admin/edituser";
+    }
+
+    @PostMapping("admin/edituser/{id}")
+    public String getEditUserPage(@PathVariable int id, User user, HttpServletRequest request) {
+        int roleId = Integer.parseInt(request.getParameter("roleId"));
+
+        user.setRole(userDao.getRoleById(roleId));
+        user.setUserId(id);
+
+        userDao.updateUser(user);
+
+        return "redirect:/admin/users";
     }
 
     @GetMapping("admin/make")

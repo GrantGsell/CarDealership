@@ -10,6 +10,7 @@ import cardealership.dto.UserRole;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import javax.management.relation.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -57,7 +58,10 @@ public class UserDaoDB implements UserDao {
     public User getUserById(int id) {
         try {
             final String SELECT_USER_BY_ID = "SELECT * FROM user WHERE userId = ?";
-            return jdbc.queryForObject(SELECT_USER_BY_ID, new UserMapper(), id);
+            User user = jdbc.queryForObject(SELECT_USER_BY_ID, new UserMapper(), id);
+
+            user.setRole(getUserRoleForUser(user.getUserId()));
+            return user;
         } catch (DataAccessException ex) {
             return null;
         }
@@ -111,6 +115,16 @@ public class UserDaoDB implements UserDao {
     public List<UserRole> getAllUserRoles() {
         final String SELECT_ALL_USER_ROLES = "SELECT * FROM userRole";
         return jdbc.query(SELECT_ALL_USER_ROLES, new UserRoleMapper());
+    }
+
+    @Override
+    public UserRole getRoleById(int id) {
+        try {
+            final String SELECT_ROLE_BY_ID = "SELECT * FROM userRole WHERE userRoleId = ?";
+            return jdbc.queryForObject(SELECT_ROLE_BY_ID, new UserRoleMapper(), id);
+        } catch (DataAccessException ex) {
+            return null;
+        }
     }
 
     private UserRole getUserRoleForUser(int userId) {
