@@ -64,7 +64,7 @@
                             <label for="inputTransmission">Transmission</label>
                             <!-- TODO: implement with database -->
                             <select id="inputTransmission" class="form-control">
-                                <option selected>Automatic</option>
+                                <option th:each="name : ${transmissions}" th:text="${name}"/>
                             </select>
                         </div>
                     </div>

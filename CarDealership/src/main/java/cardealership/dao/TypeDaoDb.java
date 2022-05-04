@@ -38,7 +38,7 @@ public class TypeDaoDb implements TypeDao {
 
     
     /**
-     * Extracts all type names from the 'TypeDao' table in the DB.
+     * Extracts all type names from the 'Type' table in the DB.
      * 
      * @return A list of all type names
      */

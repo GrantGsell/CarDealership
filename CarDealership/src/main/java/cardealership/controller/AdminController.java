@@ -5,6 +5,7 @@
 package cardealership.controller;
 
 import cardealership.dao.BodyStyleDao;
+import cardealership.dao.TransmissionDao;
 import cardealership.dao.TypeDao;
 import cardealership.dao.UserDao;
 import cardealership.dao.VehicleDao;
@@ -34,6 +35,9 @@ public class AdminController {
     
     @Autowired
     BodyStyleDao bodyStyleDao;
+    
+    @Autowired
+    TransmissionDao transmissionDao;
 
     // vehicles
     @GetMapping("admin/vehicles")
@@ -49,9 +53,13 @@ public class AdminController {
         // Create a list of all vehicle bodystyles
         List<String> bodyStyles = bodyStyleDao.getAllBodyStyleNames();
         
+        // Create a list of all vehicle transmissions
+        List<String> transmissions = transmissionDao.getAllTransmissionNames();
+        
         //Add data to the model object
         model.addAttribute("typeNames",typeNames);
         model.addAttribute("bodyStyles", bodyStyles);
+        model.addAttribute("transmissions", transmissions);
         
         return "admin/addvehicle";
     }
