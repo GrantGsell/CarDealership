@@ -18,8 +18,6 @@ import cardealership.dto.Vehicle;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.validation.Validator;
-import javax.validation.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -65,7 +63,7 @@ public class AdminController {
 
     @Autowired
     SpecialDao specialDao;
-    
+
     // vehicles
     @GetMapping("admin/vehicles")
     public String getAdminVehiclesPage() {
@@ -273,10 +271,13 @@ public class AdminController {
         user.setLastName(lastName);
         user.setEmail(email);
         user.setPassword(password);
-        
+
+        int userRoleId = Integer.parseInt(request.getParameter("userRoleId"));
+        user.setRole(userDao.getRoleById(userRoleId));
+
         userDao.createUser(user);
 
-        return "admin/users";
+        return "redirect:/admin/users";
     }
 
     @GetMapping("admin/edituser/{id}")

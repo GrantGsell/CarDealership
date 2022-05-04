@@ -21,22 +21,22 @@
                     <div class="row mb-2">
                         <div class="form-group col-md-4">
                             <label for="inputFirstName">FirstName</label>
-                            <input type="text" class="form-control" id="inputFirstName">
+                            <input type="text" class="form-control" id="inputFirstName" name="firstName">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inputLastName">LastName</label>
-                            <input type="text" class="form-control" id="inputLastName">
+                            <input type="text" class="form-control" id="inputLastName" name="lastName">
                         </div>
                     </div>
                     <div class="row mb-2">
                         <div class="form-group col-md-4">
                             <label for="inputEmail">Email</label>
-                            <input type="email" class="form-control" id="inputEmail">
+                            <input type="email" class="form-control" id="inputEmail" name="email">
                         </div>
                         <div class="form-group col-md-2">
                             <label for="inputUserRole">Role</label>
                             <!-- TODO: implement with database -->
-                            <select id="inputUserRole" class="form-control">
+                            <select id="inputUserRole" class="form-control" name="userRoleId">
                                 <option th:each="role : ${userRoles}" th:value="${role.userRoleId}" th:text="${role.name}" th:selected="${role.userRoleId==3}"></option>
                             </select>
                         </div>
@@ -44,11 +44,11 @@
                     <div class="row mb-2">
                         <div class="form-group col-md-4">
                             <label for="inputPassword">Password</label>
-                            <input type="password" class="form-control" id="inputPassword">
+                            <input type="password" class="form-control" id="inputPassword" name="password">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inputConfirmPassword">Confirm Password</label>
-                            <input type="password" class="form-control" id="inputConfirmPassword">
+                            <input type="password" class="form-control" id="inputConfirmPassword" name="confirmPassword">
                         </div>
                     </div>
                     <div class="mt-3">

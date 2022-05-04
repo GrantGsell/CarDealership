@@ -78,8 +78,14 @@ public class UserDaoDB implements UserDao {
 
     @Override
     public User createUser(User user) {
-        final String INSERT_USER = "INSERT INTO user(lastName, firstName, email, password)";
-        jdbc.update(INSERT_USER, user.getLastName(), user.getFirstName(), user.getEmail(), user.getPassword());
+        final String INSERT_USER = "INSERT INTO user(lastName, firstName, email, userPassword, userRoleId) "
+                + "VALUES(?, ?, ?, ?, ?)";
+        jdbc.update(INSERT_USER,
+                user.getLastName(),
+                user.getFirstName(),
+                user.getEmail(),
+                user.getPassword(),
+                user.getRole().getUserRoleId());
 
         int newId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
         user.setUserId(newId);
